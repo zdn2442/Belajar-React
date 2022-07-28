@@ -1,8 +1,10 @@
 // import logo from './logo.svg';
 // import './App.css';
-import Header from "./Component/header";
+import "./style/style.css"
 import React  from "react";
-import { Input, Button } from "./Component/named";
+import Identitas from './module/siswa';
+import Nilai from './module/nilai'
+
 
 
 // function App() {
@@ -42,10 +44,17 @@ import { Input, Button } from "./Component/named";
 // export default Contoh
 
 function App() {
+  let [data, setData] = React.useState([10, 20, 30, 40, 50])
   return(
     <React.Fragment>
-      <h1>Latihan Export Import</h1>
-      
+      <h1>Latihan Props</h1>
+    <section className="section">
+      <div className="bungkus">
+        <Identitas nama={"Dudul"} kelas={"XII RPL"} nilai={100}/>
+      <Identitas/>
+      </div>
+      <Nilai nama={'Dudul'} data={data}/>
+    </section>
       
     </React.Fragment>
     

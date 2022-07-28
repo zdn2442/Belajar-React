@@ -1,14 +1,13 @@
-.input{
-    border: 1px solid red;
+.id{
+    background-color: cyan;
+    padding: 5px 10px;
+    border: 1px solid blue;
+    width: 150px;
+    padding-top: 5px;
 }
-.button{
-    
-    width:10%;
-    background-color: black;
-    color: deepskyblue;
-    height: 5%
+.bungkus{
+    width: 150px;
 }
-.button:hover{
-    background-color: #61dafb;
-    color: #282c34;
+.judulNilai{
+    margin-left: 20px;
 }
