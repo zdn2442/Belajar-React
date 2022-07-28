@@ -45,9 +45,7 @@ function App() {
   return(
     <React.Fragment>
       <h1>Latihan Export Import</h1>
-      <Header/>
-      <Input/>
-      <Button/>
+      
       
     </React.Fragment>
     
