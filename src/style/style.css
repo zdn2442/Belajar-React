@@ -4,6 +4,7 @@
     border: 1px solid blue;
     width: 150px;
     padding-top: 5px;
+    
 }
 .bungkus{
     width: 150px;
@@ -14,4 +15,5 @@
 .dua{
     background-color: azure;
     border: 1px solid deepskyblue;
+    float: left;
 }

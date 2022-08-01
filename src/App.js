@@ -65,6 +65,13 @@ function App() {
       nilai: 100,
     },
   ]);
+  const [nilaiSiswa, setNilaiSiswa] = React.useState(
+    {
+      nama: "archetto",
+      kelas: "xi rpl",
+      nilai: [80,100,95]
+    }
+  )
   return (
     <React.Fragment>
       <h1>Latihan Props</h1>
@@ -74,7 +81,7 @@ function App() {
           <Identitas />
         </div>
         <Nilai nama={"Dudul"} data={data} />
-        <DataSiswa data={dataSiswa} />
+        <DataSiswa data={dataSiswa} nilai={nilaiSiswa}/>
       </section>
     </React.Fragment>
   );
