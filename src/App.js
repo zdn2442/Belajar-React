@@ -1,8 +1,8 @@
 // import logo from './logo.svg';
 // import './App.css';
-import Header from "./Component/header";
+
 import React  from "react";
-import { Input, Button } from "./Component/named";
+
 import Produk from './module/produk'
 
 
@@ -76,7 +76,7 @@ function App() {
   return(
     <React.Fragment>
       <h1>Latihan 01</h1>
-      <Produk produk={produk}/>
+      <Produk data={produk}/>
       
     </React.Fragment>
     
