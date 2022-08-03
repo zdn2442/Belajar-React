@@ -1,53 +1,47 @@
-// import logo from './logo.svg';
-// import './App.css';
-import Header from "./Component/header";
 import React  from "react";
-import { Input, Button } from "./Component/named";
+import Layout from './module/layout'
+import "./style/style.css"
+import Button from './module/button'
 
 
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p className="tulisan">
-//           Loading...
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Hello World
-//         </a>
-       
-//         <p className="tulisan 3">------------------------:v-------------------</p>
-//       </header>
-//     </div>
-//   );
-// }
 
-// export default App;
-
-
-// function Contoh() {
-//   return (
-//     <div>
-//       <h1>Hello Another World!</h1>
-//     </div>
-//   )
-// }
-
-// export default Contoh
 
 function App() {
   return(
-    <React.Fragment>
-      <h1>Latihan Export Import</h1>
+    <div className="container">
+      <h1>Latihan Props kedua</h1>
+      <div className="content">
+        <Layout title={"nomor 1"}>
+        <h1>DUAR</h1>
+      </Layout>
+      <Layout title={"nomor 2"}>
+        <h1>DUAR DUAR</h1>
+      </Layout>
+      <Layout title={"nomor 3"}>
+        <h1>DA DA DA DA DA!!</h1>
+      </Layout>
+      </div>
+      <center>
+         <Button onClick={
+          () => {
+            console.log("Berhasil menyimpan draf");
+          }
+         } color="blue" title={"Save"}/>
+      <Button 
+      onClick={
+        () => {
+          console.log("Gagal menyimpan draf");
+        }
+       } 
+       disabled={true}
+       title={"Cancel"}/>
+      <Button color="green" title={"Update"}/>
+      </center>
+       
       
       
-    </React.Fragment>
+      
+    </div>
     
       
   )

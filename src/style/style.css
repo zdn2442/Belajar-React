@@ -1,14 +1,21 @@
-.input{
-    border: 1px solid red;
+.layout{
+    border: 1px solid rebeccapurple;
+    width: 250px;
+}
+.content{
+    display: flex;
+    justify-content: center;
 }
 .button{
-    
-    width:10%;
-    background-color: black;
-    color: deepskyblue;
-    height: 5%
+    color: aliceblue;
+    padding: 5px 10px;
+    border: 1px solid black;
+    width: 200px;
+    border-radius: 4px;
+    margin: 5px 5px 5px;
 }
 .button:hover{
-    background-color: #61dafb;
-    color: #282c34;
+    color: deepskyblue;
+    background-color: black;
+    border: 1px solid skyblue;
 }
