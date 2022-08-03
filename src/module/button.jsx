@@ -26,6 +26,7 @@ export default function Button({ title, color = "red",...props}) {
          {...props}
           style={{
             backgroundColor: color,
+            
           }}
           className="button"
         >
