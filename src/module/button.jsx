@@ -28,7 +28,7 @@ export default function Button({ title, color = "red",...props}) {
             backgroundColor: color,
             
           }}
-          className="button"
+          className="button "
         >
           {title}
         </button>
