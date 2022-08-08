@@ -1,8 +1,8 @@
 import React  from "react";
-import Layout from './module/layout'
 import "./style/style.css"
 import Button from './module/button'
 import Input from './module/input'
+import Card from './module/card'
 
 
 export default function App() {
@@ -14,6 +14,14 @@ export default function App() {
         confirmPassword:"",
       }
     );
+
+      const [data, setData] = React.useState(
+        []
+      )
+      const [errors, setErrors] = React.useState(
+        {}
+      )
+
     const handleChange = (event) => {
       console.log('jalan gk?');
       setValues(
@@ -25,16 +33,56 @@ export default function App() {
         }
       )
     }
+
+    const handleBlur = (e) => {
+      e.preventDefault();
+      if (e.target.value === "") {
+        setErrors(
+        (errors) => {
+          return{
+            ...errors,
+            [e.target.name] : true,
+          }
+        }
+      )
+      }
+      
+    }
+
+    const handleSubmit = (e) => {
+      e.preventDefault()
+      console.log('Form Submit');
+      
+      setData(
+        (data) => {
+          return [...data, values]
+        } 
+      )
+      setValues(() => {
+        return{
+          username:"",
+          email:"",
+          password:"",
+          confirmPassword:"",
+        }
+      });
+    }
+
+    // console.log('error', errors);
+
   return(
     <React.Fragment>
       <div className="container">
-        <div>
-          <form>
+        <div className="content satu">
+          <form
+          onSubmit={handleSubmit}
+          >
             <Input
               name="username"
               value={values.username} 
               label={'Username'} 
               placeholder="Username"
+              onBlur={handleBlur}
               onChange = {
                 (event) => {
                   event.preventDefault();
@@ -57,7 +105,7 @@ export default function App() {
               label={'Email'}
               placeholder="Email"
               onChange={handleChange}
-              
+              onBlur={handleBlur}
             />
             <Input
               name="password"
@@ -65,7 +113,7 @@ export default function App() {
               label={'Password'} 
               placeholder="Password"
               onChange={handleChange}
-              
+              onBlur={handleBlur}
             />
             <Input
               name="confirmPassword"
@@ -73,6 +121,7 @@ export default function App() {
               label={'Confirm Password'} 
               placeholder="Confirm Password"
               onChange={handleChange}
+              onBlur={handleBlur}
             />
             <Button title={'Save'} color='lightGreen'/>
           </form>
@@ -84,12 +133,10 @@ export default function App() {
             border:"1px solid black",
             height:"40vh",
           }
-        }
+        } className='content dua'
         >
-          <p>Username : {values?.username}</p>
-          <p>Email : {values?.email}</p>
-          <p>Password : {values?.password}</p>
-          <p>Confirm Password : {values?.confirmPassword}</p>
+          <Card data={data}/>
+         
         </div>
       </div>
       
