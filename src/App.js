@@ -32,6 +32,14 @@ export default function App() {
           }
         }
       )
+      if (event.target.value !== ""){
+        setErrors(
+          {
+            ...errors,
+            [event.target.value] : true
+          }
+        )
+      }
     }
 
     const handleBlur = (e) => {
@@ -53,6 +61,7 @@ export default function App() {
       e.preventDefault()
       console.log('Form Submit');
       
+      values.id = new Date().getTimezoneOffset()
       setData(
         (data) => {
           return [...data, values]
@@ -68,7 +77,7 @@ export default function App() {
       });
     }
 
-    // console.log('error', errors);
+    console.log('error', errors);
 
   return(
     <React.Fragment>
@@ -78,6 +87,8 @@ export default function App() {
           onSubmit={handleSubmit}
           >
             <Input
+              isError={errors?.username}
+              textError={'Please fill this correctly'}
               name="username"
               value={values.username} 
               label={'Username'} 
@@ -100,6 +111,8 @@ export default function App() {
               }
             />
             <Input
+              isError={errors?.email}
+              textError={'Please fill this correctly'}
               name="email"
               value={values.email}
               label={'Email'}
@@ -108,6 +121,8 @@ export default function App() {
               onBlur={handleBlur}
             />
             <Input
+              isError={errors?.password}
+              textError={'Please fill this correctly'}
               name="password"
               value={values.password} 
               label={'Password'} 
@@ -116,6 +131,8 @@ export default function App() {
               onBlur={handleBlur}
             />
             <Input
+              isError={errors?.confirmPassword}
+              textError={'Please fill this correctly'}
               name="confirmPassword"
               value={values.confirmPassword} 
               label={'Confirm Password'} 
@@ -135,7 +152,8 @@ export default function App() {
           }
         } className='content dua'
         >
-          <Card data={data}/>
+          <h2>Confirmation Data</h2>
+          <Card data={data} setData={setData}/>
          
         </div>
       </div>

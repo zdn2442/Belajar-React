@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Input({label,isError, ...props}) {
+export default function Input({label,isError,textError, ...props}) {
     return(
         <div className="input">
         <label className="label" htmlFor={label}>
@@ -9,7 +9,7 @@ export default function Input({label,isError, ...props}) {
         <input {...props} className="input-text" id={label}/>
         {isError && 
         <p className="error">
-          Please fill correctly
+         {textError}
         </p>
         }
         
