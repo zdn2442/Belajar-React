@@ -3,6 +3,9 @@ import "./style/style.css"
 import Button from './module/button'
 import Input from './module/input'
 import Card from './module/card'
+import InputLagi from './module/input2';
+import InputJuga from './module/input3';
+import ResetButton from './module/resetButton';
 
 
 export default function App() {
@@ -12,6 +15,8 @@ export default function App() {
         email:"",
         password:"",
         confirmPassword:"",
+        ttl:"",
+        gender:""
       }
     );
 
@@ -56,6 +61,7 @@ export default function App() {
       }
       
     }
+    
 
     const handleSubmit = (e) => {
       e.preventDefault()
@@ -73,6 +79,8 @@ export default function App() {
           email:"",
           password:"",
           confirmPassword:"",
+          ttl: "",
+          gender:"",
         }
       });
     }
@@ -121,6 +129,36 @@ export default function App() {
               onBlur={handleBlur}
             />
             <Input
+              isError={errors?.ttl}
+              textError={'Please fill this correctly'}
+              name="ttl"
+              value={values.ttl}
+              label={'Place of birth'}
+              placeholder="Place of birth"
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+            <InputLagi
+              isError={errors?.date}
+              textError={'Please fill this correctly'}
+              name="date"
+              value={values.date}
+              label={"Date of birth"}
+              placeholder="Date of birth"
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+            <InputJuga
+            isError={errors?.gender}
+            textError={'Please fill this correctly'}
+            name="gender"
+            value={values.gender}
+            label={"Gender"}
+            placeholder="Gender"
+            onChange={handleChange}
+            onBlur={handleBlur}
+            />
+            <Input
               isError={errors?.password}
               textError={'Please fill this correctly'}
               name="password"
@@ -140,21 +178,23 @@ export default function App() {
               onChange={handleChange}
               onBlur={handleBlur}
             />
-            <Button title={'Save'} color='lightGreen'/>
+            <div className="button-container">
+            <ResetButton title={'Reset'}/>
+            <Button title={'Save'} />
+            </div>
           </form>
         </div>
-        <div 
-        style={
+        <div className='content dua'>
+          <div className="card" style={
           {
-            width:"40%",
-            border:"1px solid black",
-            height:"40vh",
+           
           }
-        } className='content dua'
+        } 
         >
-          <h2>Confirmation Data</h2>
+          
+          {/* <h2>Confirmation Data</h2> */}
           <Card data={data} setData={setData}/>
-         
+          </div>
         </div>
       </div>
       

@@ -19,15 +19,11 @@ import React from "react";
 //   );
 // }
 
-export default function Button({ title, color = "red",...props}) {
+export default function Button({ title,...props}) {
     return (
       <React.Fragment>
         <button
          {...props}
-          style={{
-            backgroundColor: color,
-            
-          }}
           className="button "
         >
           {title}

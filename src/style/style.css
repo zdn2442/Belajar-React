@@ -7,17 +7,18 @@
     align-items: center;
     justify-content: center;
 }
-/* .content{
-
-} */
+.content{
+    width: 50%;
+    margin: 10%;
+}
 .button{
-    color: aliceblue;
+    color: rgb(39, 76, 210);
     padding: 5px 10px;
     border: 1px solid black;
-    width: 230px;
+    width: 40%;
     border-radius: 4px;
     margin: 15px 5px 5px;
-    margin-left: 26.6%;
+    /* margin-left: 24.3%; */
 }
 .button:hover{
     color: deepskyblue;
@@ -29,6 +30,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-top: 10px;
 }
 .input-text{
     padding: 5px 5px;
@@ -44,6 +46,39 @@
 }
 form{
     margin-left: 10px;
-    border: 1px solid aqua;
-    width: 500px;
+    border: 1px solid black;
+    border-radius: 15px;
+    width: 450px;
+    box-shadow: 15px;
+}
+.label{
+    font-weight: 600;
+}
+.dua{
+    display: flex;
+    justify-content: space-evenly;
+}
+/* .card{
+    width: 350px;
+    border : 1px solid black;
+    height: 40vh
+} */
+.card-content{
+    border: 0.5px solid black;
+    border-radius: 3px;
+    padding: 10px;
+    width: 250px;
+    height: 30%;
+}
+input{
+    border: none;
+    border-bottom: 1px solid black;
+}
+#gender{
+    width: 160px;
+    height: 25px;
+}
+.button-container{
+    display: flex;
+    justify-content: space-evenly;
 }
