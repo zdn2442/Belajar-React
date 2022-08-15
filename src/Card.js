@@ -17,7 +17,8 @@ export default function Card({count, setCount}) {
                 }
             </h3>
             {count}
-            <button onClick={handleCount}>Tambah</button>
+            <button 
+            onClick={handleCount}>Tambah</button>
             <button onClick={handleMinus}>Kurang</button>
         </React.Fragment>
     )
