@@ -11,10 +11,12 @@ export default function Card({count, setCount}) {
     return(
         <React.Fragment>
             <p>Ini Card</p>
+            <h3>
+                {
+                    count <= 10 ? "Kurang dari Sepuluh" :  "Lebih dari Sepuluh"
+                }
+            </h3>
             {count}
-            <h3>{
-                count
-                }</h3>
             <button onClick={handleCount}>Tambah</button>
             <button onClick={handleMinus}>Kurang</button>
         </React.Fragment>
