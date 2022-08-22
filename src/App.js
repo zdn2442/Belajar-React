@@ -6,6 +6,7 @@ import Card from "./module/card";
 import InputLagi from "./module/input2";
 import InputJuga from "./module/input3";
 import ResetButton from "./module/resetButton";
+import Textarea from './module/textarea';
 
 export default function App() {
   const [values, setValues] = React.useState({
@@ -15,10 +16,12 @@ export default function App() {
     confirmPassword: "",
     ttl: "",
     gender: "",
+    textarea:""
   });
 
   const [data, setData] = React.useState([]);
   const [errors, setErrors] = React.useState({});
+  const [popError, setPopError] = React.useState({})
 
   const handleChange = (event) => {
     console.log("jalan gk?");
@@ -34,6 +37,12 @@ export default function App() {
         [event.target.value]: true,
       });
     }
+    if (event.target.value !== "") {
+      setPopError({
+        ...popError,
+        [event.target.value]: true,
+      });
+    }
   };
 
   const handleBlur = (e) => {
@@ -46,8 +55,24 @@ export default function App() {
         };
       });
     }
+    if (e.target.value !== ""){
+      setErrors((errors) => {
+        return {
+          ...errors,
+          [e.target.name]: false,
+        };
+      });
+    }
+    
   };
-
+  // if (e.target.value === "") {
+  //   setPopError((popError) => {
+  //     return {
+  //       ...popError,
+  //       [e.target.name]: true,
+  //     };
+  //   });
+  // }
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Form Submit");
@@ -64,26 +89,10 @@ export default function App() {
         confirmPassword: "",
         ttl: "",
         gender: "",
+        textarea:""
       };
     });
-    if (e.target.value === "") {
-    alert('This form must be filled')
-    }
   };
-
-  const handleReset = (e) => {
-    e.preventDefault();
-    setValues(() => {
-      return {
-        username: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
-        ttl: "",
-        gender: "",
-      };
-    });
-  }
 
   console.log("error", errors);
 
@@ -92,86 +101,37 @@ export default function App() {
       <div className="container">
         <div className="content satu">
           <form onSubmit={handleSubmit}>
-            <Input
-              isError={errors?.username}
-              textError={"Please fill this correctly"}
-              name="username"
-              value={values.username}
-              label={"Username"}
-              placeholder="Username"
-              onBlur={handleBlur}
-              onChange={(event) => {
-                event.preventDefault();
-                console.log("ok jalan");
-                console.log(event);
-                setValues((values) => {
-                  return {
-                    ...values,
-                    username: event.target.value,
-                  };
-                });
-              }}
+            <p>{setPopError}</p>
+            <h5>Buat Catatan</h5>
+            <Input 
+            isError={errors?.email} 
+            textError={"Please fill this correctly"} 
+            name="email" 
+            value={values.email} 
+            placeholder="Judul" 
+            onChange={handleChange} 
+            onBlur={handleBlur} 
             />
-            <Input isError={errors?.email} textError={"Please fill this correctly"} name="email" value={values.email} label={"Email"} placeholder="Email" onChange={handleChange} onBlur={handleBlur} />
-            <Input isError={errors?.ttl} textError={"Please fill this correctly"} name="ttl" value={values.ttl} label={"Place of birth"} placeholder="Place of birth" onChange={handleChange} onBlur={handleBlur} />
-            <InputLagi isError={errors?.date} textError={"Please fill this correctly"} name="date" value={values.date} label={"Date of birth"} placeholder="Date of birth" onChange={handleChange} onBlur={handleBlur} />
-            <InputJuga isError={errors?.gender} textError={"Please fill this correctly"} name="gender" value={values.gender} label={"Gender"} placeholder="Gender" onChange={handleChange} onBlur={handleBlur} />
-            <Input isError={errors?.password} textError={"Please fill this correctly"} name="password" value={values.password} label={"Password"} placeholder="Password" onChange={handleChange} onBlur={handleBlur} />
-            <Input
-              isError={errors?.confirmPassword}
-              textError={"Please fill this correcztly"}
-              name="confirmPassword"
-              value={values.confirmPassword}
-              label={"Confirm Password"}
-              placeholder="Confirm Password"
-              onChange={handleChange}
-              onBlur={handleBlur}
+            <Textarea
+            isError={errors?.textarea}
+            textError={"Please fill this correctly"} 
+            name="textarea"
+            onChange={handleChange} 
+            onBlur={handleBlur} 
+            value={values.textarea}
             />
-            <div className="button-container">
-              <ResetButton title={"Reset"} onClick={handleReset}/>
-              <Button title={"Save"} onSubmit={handleSubmit}/>
-            </div>
+            <Button title={"Save"} onSubmit={handleSubmit}/>
             
           </form>
-        </div>
-        <div className="content dua">
-          <div className="card">
+          <div>
+          <div>
             {/* <h2>Confirmation Data</h2> */}
             <Card data={data} setData={setData} />
           </div>
         </div>
+        </div>
+        
       </div>
     </React.Fragment>
   );
 }
-
-// function App() {
-//   let [count, setCount] = React.useState(0);
-//   const handleTambah = () => {
-//     setCount(count + 1)
-//   }
-//   const handleKurang = () => {
-//     setCount(count - 1)
-//   }
-//   const handleReset = () => {
-//     setCount(0)
-//   }
-//   return(
-//     <React.Fragment>
-//       <h1>Counting from {count}</h1>
-//       <Button onClick={handleTambah} title={"Tambah"} color="blue"/>
-//       <Button
-//         onClick={handleKurang}
-//         title={"Kurang"}
-//         disabled={count <=0 ? true : false} />
-//       <Button
-//         onClick={handleReset}
-//         title={"Reset"}
-//         color="white"/>
-//     </React.Fragment>
-//   )
-// }
-
-// //JSX harus dibungkus dalam satu element parent
-
-// export default App;

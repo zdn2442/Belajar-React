@@ -18,14 +18,8 @@ export default function Card({ data, setData }) {
       {data?.map((item, i) => {
         return (
           <div className="card-content">
-            <p>Id : {item?.id}</p>
-            <p>Username : {item.username}</p>
-            <p>Email : {item.email}</p>
-            <p>Place of birth : {item.ttl}</p>
-            <p>Date of birth : {item.date}</p>
-            <p>Gender : {item.gender}</p>
-            <p>Password : {item.password}</p>
-            <p>Confirm Password : {item.confirmPassword}</p>
+            <h2>{item.email}</h2>
+            <p>{item.textarea}</p>
             <button className="button-delete" value={item?.id} onClick={handleDelete}>
               Delete
             </button>
