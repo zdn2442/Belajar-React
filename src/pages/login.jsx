@@ -3,14 +3,17 @@ import {useNavigate} from 'react-router-dom';
 
 export default function Login(){
     let navigate = useNavigate()
+    const handleRegister = () =>{
+            return navigate('register', {replace:true})
+    }
     return (
         <div>
             <h1>Login Page</h1>
            <div className="flex">
-           <Button title={'Register'} 
-           onClick={() => {
-                return navigate('/register', {replace:true})
-            }}/>
+           <Button 
+           title={'Register'} 
+           onClick={handleRegister}
+           />
            <Button title={'Login'}/>
            </div>
         </div>
