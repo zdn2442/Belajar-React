@@ -7,7 +7,7 @@ export default function Login(){
             return navigate('/register', {replace:true})
     }
     const handleLogin = () =>{
-        return navigate('/admin/dashbord', {replace:true})
+        return navigate('/admin/dashboard', {replace:true})
 }
     return (
         <div>

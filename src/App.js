@@ -15,9 +15,11 @@ function App() {
         <Route path="/" element={<Login/>}/>
         <Route path="/register" element={<Register/>}/>
         <Route path="/admin" element={<Admin/>}>
-          {/* <Route path="/dashboard" element={<Dashboard/>}/>
-          <Route path="/kelas" element={<Kelas/>}/>
-          <Route path="/user" element={<User/>}/> */}
+          <Route path="dashboard" element={<Dashboard/>}/>
+          <Route path="kelas" element={<Kelas/>}/>
+          <Route path="user" element={<User/>}>
+            <Route path="userDetail" element={<UserDetail/>}/>
+          </Route>
         </Route>
         <Route path="*" element={<Login/>}/>
       </Routes>
