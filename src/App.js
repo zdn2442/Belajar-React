@@ -3,6 +3,7 @@ import {Routes, Route} from 'react-router-dom'
 import Login from './pages/login'
 import Register from './pages/register';
 import Admin from './pages/admin'
+import second from './pages/'
 
 function App() {
   return(
@@ -11,9 +12,7 @@ function App() {
         <Route path="/" element={<Login/>}/>
         <Route path="/register" element={<Register/>}/>
         <Route path="/admin" element={<Admin/>}>
-          <Link to={"/dashboard"} >Home</Link>
-          <Link to={"/kelas"} >Setting</Link>
-          <Link to={"/user"} >About</Link>
+          <Route path="/dashboard" element={<Dashboard/>}/>
         </Route>
         <Route path="*" element={<Login/>}/>
       </Routes>
