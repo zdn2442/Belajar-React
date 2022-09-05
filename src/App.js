@@ -7,8 +7,11 @@ function App() {
   return(
     <React.Fragment>
       <Routes>
-        <Route path="/" element={<Login/>}/>
+        <Route path="/login" element={<Login/>}/>
         <Route path="/register" element={<Register/>}/>
+        <Route>
+          
+        </Route>
         <Route path="*" element={<Login/>}/>
       </Routes>
     </React.Fragment>

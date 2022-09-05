@@ -6,15 +6,21 @@ export default function Login(){
     const handleRegister = () =>{
             return navigate('register', {replace:true})
     }
+    const handleLogin = () =>{
+        return navigate('', {replace:true})
+}
     return (
         <div>
             <h1>Login Page</h1>
            <div className="flex">
-           <Button 
-           title={'Register'} 
+           <button 
+           className="bg-green-500 text-white px-3 py-1 rounded-lg"
            onClick={handleRegister}
-           />
-           <Button title={'Login'}/>
+           >Register</button>
+           <button 
+           className="bg-green-500 text-white px-3 py-1 rounded-lg"
+           onClick={handleRegister}
+           >Login</button>
            </div>
         </div>
     )
