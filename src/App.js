@@ -1,9 +1,16 @@
 import React  from "react";
-import {Routes, Route, Link, NavLink} from 'react-router-dom';
+import {Routes, Route, Link, NavLink, Navigate} from 'react-router-dom';
 import Home from './pages/home';
 import Setting from './pages/setting';
 import About from './pages/about';
 import Detail from './pages/detail';
+import Profile from "./pages/Profile";
+import Phone from "./pages/Phone";
+import Komputer from "./pages/komputer";
+import Iphone from "./pages/setting/komputer/Iphone";
+import Samsung from "./pages/setting/komputer/Samsung";
+import Lenovo from './pages/setting/komputer/Lenovo';
+import NotFound from './pages/notFound'
 
 function App() {
   return(
@@ -58,9 +65,19 @@ function App() {
       </section>
       <Routes>
         <Route path="/" element={<Home/>}/>
-        <Route path="/setting" element={<Setting/>}/>
+        <Route path="/setting" element={<Setting/>}>
+          <Route path="/setting/komputer" element={<Komputer/>}>
+            <Route path="lenovo" element={<Lenovo/>} />
+            <Route path="iPhone" element={<Iphone/>} />
+            <Route path="samsung" element={<Samsung/>} />
+          </Route>
+          <Route path="/setting/phone" element={<Phone/>}/>
+          <Route path="/setting/profile" element={<Profile/>}/>
+        </Route>
         <Route path="/about" element={<About/>}/>
         <Route path="/about/:id/:nama" element={<Detail/>}/>
+        <Route path="/404" element={<NotFound/>}></Route>
+        <Route path="*" element={<Navigate to="404" replace/>}></Route>
       </Routes>
     </React.Fragment>   
   );
