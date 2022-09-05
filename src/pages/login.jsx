@@ -7,7 +7,7 @@ export default function Login(){
             return navigate('/register', {replace:true})
     }
     const handleLogin = () =>{
-        return navigate('', {replace:true})
+        return navigate('/admin/dashbord', {replace:true})
 }
     return (
         <div>
@@ -19,7 +19,7 @@ export default function Login(){
            >Register</button>
            <button 
            className="bg-green-500 text-white px-3 py-1 rounded-lg"
-           onClick={handleRegister}
+           onClick={handleLogin}
            >Login</button>
            </div>
         </div>
