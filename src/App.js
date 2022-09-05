@@ -2,6 +2,7 @@ import React from "react";
 import {Routes, Route} from 'react-router-dom'
 import Login from './pages/login'
 import Register from './pages/register';
+import Admin from './pages/admin'
 
 function App() {
   return(
@@ -9,7 +10,7 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login/>}/>
         <Route path="/register" element={<Register/>}/>
-        <Route>
+        <Route path="/admin" element={<Admin/>}>
           
         </Route>
         <Route path="*" element={<Login/>}/>
