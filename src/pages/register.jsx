@@ -7,7 +7,7 @@ export default function Register() {
     <div>
       <h1>Register Page</h1>
       <button className="bg-green-500 text-white px-3 py-1 rounded-lg" onClick={() => {
-        return navigate(-1)
+        return navigate('/',{replace:true} )
       }}>
         Kembali ke Login
       </button>

@@ -4,7 +4,7 @@ import {useNavigate} from 'react-router-dom';
 export default function Login(){
     let navigate = useNavigate()
     const handleRegister = () =>{
-            return navigate('register', {replace:true})
+            return navigate('/register', {replace:true})
     }
     const handleLogin = () =>{
         return navigate('', {replace:true})
