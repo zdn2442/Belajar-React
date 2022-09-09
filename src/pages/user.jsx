@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import Card from './card'
 
 export default function User() {
   const [users, setUsers] = React.useState([]);
@@ -10,11 +11,11 @@ export default function User() {
 
   const getUserHandle = async () => {
     try {
-      const response = await axios.get(`https://reqres.in/api/users?page=${page}`);
+      const response = await axios.get("https://equran.id/api/surat");
       console.log("response => ", response.data);
-      setUsers(response.data.data);
-      setPage(response.data.page);
-      setPerPage(response.data.per_page);
+      setUsers(response.data);
+      setPage(response.data.nama);
+      setPerPage(response.data.nama_latin);
     } catch (err) {}
   };
 
@@ -28,57 +29,22 @@ export default function User() {
 
   return (
     <div>
-      <h1>User who is accepted</h1>
-      <table className="table-auto ">
-        <thead>
-          <tr className="text-left border">
-            <th className="pr-5">No</th>
-            <th className="pr-15">Email</th>
-            <th className="pr-5">First Name</th>
-            <th className="pr-5">Last Name</th>
-            <th className="pr-5">Avatar</th>
-            <th>Detail</th>
-          </tr>
-        </thead>
-        <tbody>
-          {users.map((user, index) => {
+      <h1 className="">Daftar Surat</h1>
+      <div className="grid grid-cols-3 gap-3 border-r-2 ">
+        {users.map((user, index) => {
             return (
-              <tr key={index} className="border">
-                <td>{index + 1}</td>
-                <td>{user.email}</td>
-                <td>{user.first_name}</td>
-                <td>{user.last_name}</td>
-                <td>
-                  <img className="rounded-full h-10 w-10" src={user.avatar} alt={user.avatar} />
-                </td>
-                <td>Detail</td>
-              </tr>
+              <Card key={index} 
+               nomor={index + 1}
+               nama={user.nama}
+               namaLatin={user.nama_latin}
+               jumlahAyat= {user.jumlah_ayat}
+               tempatTurun= {user.tempat_turun}
+               arti= {user.arti}
+              />
             );
           })}
-        </tbody>
-      </table>
-      <p>Saat ini di Page {page}</p>
-
-      <div className="flex items-center justify-center">
-        <button
-          className="mx-10"
-          onClick={() => {
-            console.log('running?');
-            setPage(page - 1);
-          }}
-        >
-          Previos
-        </button>
-        <button
-          className="mx-10"
-          onClick={() => {
-            console.log('running?');
-            setPage(page + 1);
-          }}
-        >
-          Next
-        </button>
       </div>
+      
     </div>
   );
 }

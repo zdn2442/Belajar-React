@@ -7,7 +7,7 @@ import Error from './pages/error';
 function App() {
   return(
     <React.Fragment>
-      <h1 className="bg-red-500">API Training</h1>
+      <h1 className="bg-blue-800 text-white text-center ">EQur'an.id</h1>
       <Routes>
         <Route path="/user" element={<User/>}/>
         <Route path="/user/:id/detail" element={<UserDetail/>}/>
