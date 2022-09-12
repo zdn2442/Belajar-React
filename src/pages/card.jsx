@@ -10,9 +10,12 @@ export default function Card({nomor, nama, namaLatin, jumlahAyat, tempatTurun, a
             <div className='ml-10'>{jumlahAyat}</div>
             </div>
             <div>{nama}</div>
+            <div className='flex flex-end'>
+                <div>{tempatTurun}</div>
+                <div className='px-1'>-</div>
+                <div>{arti}</div>
+            </div>
             
-            <div>{tempatTurun}</div>
-            <div>{arti}</div>
         </div>
         </React.Fragment>
         
