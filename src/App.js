@@ -4,6 +4,7 @@ import User from './pages/user';
 import UserDetail from './pages/userDetail';
 import Error from './pages/error';
 import CreateUser from './pages/createUser'
+import UpdateUser from './pages/updateUser'
 
 function App() {
   return(
@@ -12,7 +13,8 @@ function App() {
       <Routes>
         <Route path="/user" element={<User/>}/>
         <Route path="/user/:id/detail" element={<UserDetail/>}/>
-        <Route path="/user/createUser" element={<CreateUser/>}/>
+        <Route path="/user/create" element={<CreateUser/>}/>
+        <Route path="/user/update/:id" element={<UpdateUser/>}/>
         <Route path="*" element={<Error replace={true}/>}/>
       </Routes>
     </React.Fragment>

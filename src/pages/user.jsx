@@ -1,7 +1,10 @@
 import React from "react";
 import axios from "axios";
+import {Link, useNavigate} from 'react-router-dom'
+import Button from '../module/button';
 
 export default function User() {
+  let navigate = useNavigate()
   const [users, setUsers] = React.useState([]);
   //state untuk menyimpan data user dari api
 
@@ -27,21 +30,18 @@ export default function User() {
   return (
     <div>
       <h1>User who is accepted</h1>
-      <button 
-      onClick={() => {
-        return
-      }}
-      >Tambah User</button>
+      <Link to='/user/create'>Add User</Link>
       <table className="table-auto ">
         <thead>
           <tr className="text-left border">
             <th className="pr-5">No</th>
-            <th className="pr-15">Username</th>
+            <th className="pr-10">Username</th>
             <th className="pr-5">Nama</th>
             <th className="pr-5">Email</th>
             <th className="pr-5">Jenis Kelamin</th>
-            <th>Dibuat</th>
-            <th>Diupdate</th>
+            <th className="pr-5">Dibuat</th>
+            <th className="pr-5">Diupdate</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -55,6 +55,12 @@ export default function User() {
                 <td>{user.jenis_kelamin}</td>
                 <td>{user.stored_at}</td>
                 <td>{user.update_at}</td>
+                <td>
+                  <Button onClick={() => {
+                    return navigate(`/user/update/${user.id}`)
+                  }} color='blue' title={'Edit'}/>
+                  <Button color="red" title={'Delete'}/>
+                </td>
               </tr>
             );
           })}

@@ -2,19 +2,18 @@ import React from "react";
 import Input from "../module/input";
 import Button from "../module/button";
 import axios from "axios";
-import {useNavigate, Link} from 'react-router-dom'
+import {useNavigate, Link, useParams} from 'react-router-dom'
 import Select from './select'
 
-export default function CreateUser() {
+export default function UpdateUser() {
     let navigate = useNavigate()
+    let {id} = useParams()
   const [isLoading, setIsLoading] = React.useState(false);
   const [users, setUsers] = React.useState({
     username: "",
     email: "",
     name: "",
     jenis_kelamin: "laki-laki",
-    password: "",
-    password_confirmation: "",
   });
   const handleChange = (e) => {
     setUsers((users) => {
@@ -28,18 +27,40 @@ export default function CreateUser() {
     console.log(users);
     try {
         setIsLoading(true)
-        const response = await axios.post('https://belajar-react.smkmadinatulquran.sch.id/api/users/create', users)
+        const response = await axios.put(`https://belajar-react.smkmadinatulquran.sch.id/api/users/update/${id}`, users)
         setIsLoading(false)
-        // return navigate('/user')
+         return navigate('/user')
     } catch (err) {
         console.log(err);
         setIsLoading(false)
         alert('Error!!')
     }
   }
+  const getDetailUser = async() => {
+    try {
+        const response  = await axios.get(`https://belajar-react.smkmadinatulquran.sch.id/api/users/detail/${id}`)
+        console.log( 'response => ',response.data);
+        const dataUser = response.data.data
+        console.log(dataUser);
+        setUsers(() => {
+            return{
+                username: dataUser.username,
+                email: dataUser.email,
+                name: dataUser.name,
+                jenis_kelamin: dataUser.jenis_kelamin,
+            }
+        })
+    } catch (error) {
+        
+    }
+  }
+  React.useEffect(() => {
+    getDetailUser(id)
+  }, [])
+  
   return (
     <div>
-      <h1>Tambah User</h1>
+      <h1>Update User dengan id {id}</h1>
       <form onSubmit={handleSubmit}>
         <Input 
           value={users.username} 
@@ -68,27 +89,13 @@ export default function CreateUser() {
           label={'jenis_kelamin'}
           placeholder="jenis_kelamin"
           name={'jenis_kelamin'}
-          onChange={handleChange}
+          onChange={handleChange}  
         >
           <option>Pilih</option>
           <option value={'laki-laki'}>laki-laki</option>
           <option value={'perempuan'}>perempuan</option>
         </Select>
-        <Input 
-          value={users.password} 
-          label={"password"} 
-          placeholder="password" 
-          name={'password'} 
-          onChange={handleChange}
-        />
-        <Input 
-          value={users.password_confirmation} 
-          label={"confirm password"} 
-          placeholder="confirm password" 
-          name={'password_confirmation'} 
-          onChange={handleChange}
-        />
-        <Button title={isLoading ? 'Saving Data' : 'Save'} />
+        <Button title={isLoading ? 'Updating Data' : 'Update'} />
         <Link to={'/user'} className='pl-5'>
           <Button title={'Back to user'}/>
         </Link>

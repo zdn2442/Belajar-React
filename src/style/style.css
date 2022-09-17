@@ -1,14 +1,49 @@
-.input{
-    border: 1px solid red;
+.layout{
+    border: 1px solid rebeccapurple;
+    width: 250px;
 }
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+/* .content{
+
+} */
 .button{
-    
-    width:10%;
-    background-color: black;
-    color: deepskyblue;
-    height: 5%
+    color: aliceblue;
+    padding: 5px 10px;
+    border: 1px solid black;
+    width: 230px;
+    border-radius: 4px;
+    margin: 15px 5px 5px;
+    margin-left: 26.6%;
 }
 .button:hover{
-    background-color: #61dafb;
-    color: #282c34;
+    color: deepskyblue;
+    background-color: black;
+    border: 1px solid skyblue;
+    
+}
+.input{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.input-text{
+    padding: 5px 5px;
+    border-radius: 3px;
+    width: 35%;
+    margin-top: 5px;
+}
+.error{
+    color: red;
+    font-style: italic;
+    font-size: 10px;
+    font-weight: bold;
+}
+form{
+    margin-left: 10px;
+    border: 1px solid aqua;
+    width: 500px;
 }
