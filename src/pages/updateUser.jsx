@@ -9,45 +9,55 @@ export default function UpdateUser() {
     let navigate = useNavigate()
     let {id} = useParams()
   const [isLoading, setIsLoading] = React.useState(false);
-  const [users, setUsers] = React.useState({
-    username: "",
-    email: "",
-    name: "",
-    jenis_kelamin: "laki-laki",
+  const [books, setbooks] = React.useState({
+    kode_penulis: "55555",
+    judul_buku: "",
+    nama_pengarang: "",
+    nama_penerbit_buku: "",
+    ketebalan_buku: Number,
+    tahun_terbit_buku: Number,
+    sinopsis: ""
   });
   const handleChange = (e) => {
-    setUsers((users) => {
+    setbooks((books) => {
       return {
-        ...users,
+        ...books,
         [e.target.name]: e.target.value,
       };
     });
   };
-  const handleSubmit = async() => {
-    console.log(users);
+  const handleSubmit = async(e) => {
+    e.preventDefault()
+    console.log(books);
     try {
         setIsLoading(true)
-        const response = await axios.put(`https://belajar-react.smkmadinatulquran.sch.id/api/users/update/${id}`, users)
+        const response = await axios.put(`https://api-react-2.herokuapp.com/api/perpustakaan/${id}?kode=55555`, books)
         setIsLoading(false)
-         return navigate('/user')
+        //  return navigate('/admin/buku')
+        alert('Berhasil Memperbarui')
     } catch (err) {
         console.log(err);
         setIsLoading(false)
         alert('Error!!')
     }
+    
   }
   const getDetailUser = async() => {
     try {
-        const response  = await axios.get(`https://belajar-react.smkmadinatulquran.sch.id/api/users/detail/${id}`)
+        const response  = await axios.get(`https://api-react-2.herokuapp.com/api/perpustakaan/${id}?kode=55555`)
         console.log( 'response => ',response.data);
         const dataUser = response.data.data
         console.log(dataUser);
-        setUsers(() => {
+        setbooks(() => {
             return{
-                username: dataUser.username,
-                email: dataUser.email,
-                name: dataUser.name,
-                jenis_kelamin: dataUser.jenis_kelamin,
+                id: dataUser?.id,
+                kode_penulis: dataUser?.kode_penulis,
+                judul_buku: dataUser?.judul_buku,
+                nama_pengarang: dataUser?.nama_pengarang,
+                nama_penerbit_buku: dataUser?.nama_penerbit_buku,
+                ketebalan_buku: dataUser?.ketebalan_buku,
+                tahun_terbit_buku: dataUser?.tahun_terbit_buku,
+                sinopsis: dataUser?.sinopsis
             }
         })
     } catch (error) {
@@ -60,43 +70,52 @@ export default function UpdateUser() {
   
   return (
     <div>
-      <h1>Update User dengan id {id}</h1>
+      <h1>Update Buku dengan id {id}</h1>
       <form onSubmit={handleSubmit}>
         <Input 
-          value={users.username} 
-          label={"username"} 
-          placeholder="username" 
-          name={"username"} 
+          value={books.judul_buku} 
+          label={"Perbarui Judul"} 
+          placeholder="Perbarui Judul" 
+          name={"judul_buku"} 
           onChange={handleChange} 
         />
         <Input 
-          value={users.name} 
-          label={"name"} 
-          placeholder="name" 
-          name={"name"} 
+          value={books.nama_pengarang} 
+          label={"Perbarui Nama Pengarang"} 
+          placeholder="Perbarui Nama Pengarang" 
+          name={"nama_pengarang"} 
           onChange={handleChange} 
         />
         <Input 
-          value={users.email} 
-          label={"email"} 
-          type="email" 
-          placeholder="email" 
-          name={"email"} 
+          value={books.nama_penerbit_buku} 
+          label={"Perbarui Nama Penerbit"} 
+          placeholder="Perbarui Nama Penerbit" 
+          name={"nama_penerbit_buku"} 
           onChange={handleChange} 
         />
-        <Select
-          value={users.jenis_kelamin}
-          label={'jenis_kelamin'}
-          placeholder="jenis_kelamin"
-          name={'jenis_kelamin'}
-          onChange={handleChange}  
-        >
-          <option>Pilih</option>
-          <option value={'laki-laki'}>laki-laki</option>
-          <option value={'perempuan'}>perempuan</option>
-        </Select>
+        <Input 
+          value={books.ketebalan_buku} 
+          label={"Perbarui Ketebalan Buku"} 
+          placeholder="Perbarui Ketebalan Buku" 
+          name={"ketebalan_buku"} 
+          onChange={handleChange} 
+        />
+        <Input 
+          value={books.tahun_terbit_buku} 
+          label={"Perbarui Tahun diterbitkannya Buku"} 
+          placeholder="Perbarui Tahun diterbitkannya Buku" 
+          name={"tahun_terbit_buku"} 
+          onChange={handleChange} 
+        />
+        <Input 
+          value={books.sinopsis} 
+          label={"Perbarui Sinopsis"} 
+          placeholder="Perbarui Sinopsis" 
+          name={"sinopsis"} 
+          onChange={handleChange} 
+        />
         <Button title={isLoading ? 'Updating Data' : 'Update'} />
-        <Link to={'/user'} className='pl-5'>
+        <Link to={'/admin/buku'} className='pl-5'>
           <Button title={'Back to user'}/>
         </Link>
         

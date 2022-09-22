@@ -1,5 +1,5 @@
 export default function Error() {
     return(
-        <div>Halaman tidak ditemukan</div>
+        <div className="text-center">404 Not Found</div>
     )
 }

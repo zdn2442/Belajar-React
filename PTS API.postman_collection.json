@@ -1,0 +1,225 @@
+{
+	"info": {
+		"_postman_id": "be5a5ceb-fa06-42fb-9a25-888537a40a7b",
+		"name": "PTS API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11742501"
+	},
+	"item": [
+		{
+			"name": "Perpustakaan",
+			"item": [
+				{
+					"name": "GET buku",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api-react-2.herokuapp.com/api/perpustakaan?kode=33333",
+							"protocol": "https",
+							"host": [
+								"api-react-2",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"perpustakaan"
+							],
+							"query": [
+								{
+									"key": "keyword",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "per_page",
+									"value": "10",
+									"disabled": true
+								},
+								{
+									"key": "page_size",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "kode",
+									"value": "33333"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Buku",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"kode_penulis\": \"33333\",\n    \"judul_buku\": \"js\",\n    \"nama_pengarang\": \"ihsan\",\n    \"nama_penerbit_buku\": \"mq\",\n    \"ketebalan_buku\": \"123\",\n    \"tahun_terbit_buku\": 2004,\n    \"sinopsis\": \"kfjkaldlkdlkgkgkg\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api-react-2.herokuapp.com/api/perpustakaan",
+							"protocol": "https",
+							"host": [
+								"api-react-2",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"perpustakaan"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Detail Buku",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api-react-2.herokuapp.com/api/perpustakaan/89?kode=33333",
+							"protocol": "https",
+							"host": [
+								"api-react-2",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"perpustakaan",
+								"89"
+							],
+							"query": [
+								{
+									"key": "keyword",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "per_page",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "page_size",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "kode",
+									"value": "33333"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE Buku",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api-react-2.herokuapp.com/api/perpustakaan/2?kode=12345",
+							"protocol": "https",
+							"host": [
+								"api-react-2",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"perpustakaan",
+								"2"
+							],
+							"query": [
+								{
+									"key": "kode",
+									"value": "12345"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE Buku",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"kode_penulis\": \"444444\",\n    \"judul_buku\": \"js\",\n    \"nama_pengarang\": \"ihsan\",\n    \"nama_penerbit_buku\": \"smk mq\",\n    \"ketebalan_buku\": \"123\",\n    \"tahun_terbit_buku\": 2004,\n    \"sinopsis\": \"kfjkaldlkdlkgkgkg\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api-react-2.herokuapp.com/api/perpustakaan/89?kode=33333",
+							"protocol": "https",
+							"host": [
+								"api-react-2",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"perpustakaan",
+								"89"
+							],
+							"query": [
+								{
+									"key": "kode",
+									"value": "33333"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

@@ -5,17 +5,27 @@ import UserDetail from './pages/userDetail';
 import Error from './pages/error';
 import CreateUser from './pages/createUser'
 import UpdateUser from './pages/updateUser'
+import Home from './pages/home'
+import Admin from './pages/admin'
+import Dashboard from './pages/dashboard'
+import About from './pages/about'
+import Buku from './pages/buku'
 
 function App() {
   return(
     <React.Fragment>
-      <h1 className="bg-red-500">API Training</h1>
       <Routes>
+        <Route path="*" element={<Home/>}/>
+        <Route path="/home" element={<Home/>}/>
         <Route path="/user" element={<User/>}/>
-        <Route path="/user/:id/detail" element={<UserDetail/>}/>
-        <Route path="/user/create" element={<CreateUser/>}/>
-        <Route path="/user/update/:id" element={<UpdateUser/>}/>
-        <Route path="*" element={<Error replace={true}/>}/>
+        <Route path="/admin/:id/detail" element={<UserDetail/>}/>
+        <Route path="/admin/create" element={<CreateUser/>}/>
+        <Route path="/admin/update/:id" element={<UpdateUser/>}/>
+        <Route path="/admin" element={<Admin/>}/>
+        <Route path="/admin/dashboard" element={<Dashboard/>}/>
+        <Route path="/admin/buku" element={<Buku/>}/>
+        <Route path="/admin/about" element={<About/>}/>
+        <Route path="404" element={<Error replace={true}/>}/>
       </Routes>
     </React.Fragment>
     

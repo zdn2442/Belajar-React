@@ -8,29 +8,32 @@ import Select from './select'
 export default function CreateUser() {
     let navigate = useNavigate()
   const [isLoading, setIsLoading] = React.useState(false);
-  const [users, setUsers] = React.useState({
-    username: "",
-    email: "",
-    name: "",
-    jenis_kelamin: "laki-laki",
-    password: "",
-    password_confirmation: "",
+  const [books, setBooks] = React.useState({
+    kode_penulis:'55555',
+    judul_buku: "",
+    nama_pengarang: "",
+    nama_penerbit_buku: "",
+    ketebalan_buku: Number,
+    tahun_terbit_buku: Number,
+    sinopsis: ""
   });
   const handleChange = (e) => {
-    setUsers((users) => {
+    setBooks((books) => {
       return {
-        ...users,
+        ...books,
         [e.target.name]: e.target.value,
       };
     });
   };
-  const handleSubmit = async() => {
-    console.log(users);
+  const handleSubmit = async(e) => {
+    e.preventDefault();
+    console.log(books);
     try {
         setIsLoading(true)
-        const response = await axios.post('https://belajar-react.smkmadinatulquran.sch.id/api/users/create', users)
+        const response = await axios.post('https://api-react-2.herokuapp.com/api/perpustakaan', books)
         setIsLoading(false)
         // return navigate('/user')
+        alert('Berhasil Menyimpan')
     } catch (err) {
         console.log(err);
         setIsLoading(false)
@@ -41,55 +44,57 @@ export default function CreateUser() {
     <div>
       <h1>Tambah User</h1>
       <form onSubmit={handleSubmit}>
-        <Input 
-          value={users.username} 
-          label={"username"} 
-          placeholder="username" 
-          name={"username"} 
+      <Input 
+          value={books.kode_penulis} 
+          label={"Kode Penulis"} 
+          placeholder="Kode Penulis" 
+          name={"kode_penulis"} 
           onChange={handleChange} 
         />
         <Input 
-          value={users.name} 
-          label={"name"} 
-          placeholder="name" 
-          name={"name"} 
+          value={books.judul_buku} 
+          label={"Judul"} 
+          placeholder="Judul" 
+          name={"judul_buku"} 
           onChange={handleChange} 
         />
         <Input 
-          value={users.email} 
-          label={"email"} 
-          type="email" 
-          placeholder="email" 
-          name={"email"} 
+          value={books.nama_pengarang} 
+          label={"Nama Pengarang"} 
+          placeholder="Nama Pengarang" 
+          name={"nama_pengarang"} 
           onChange={handleChange} 
         />
-        <Select
-          value={users.jenis_kelamin}
-          label={'jenis_kelamin'}
-          placeholder="jenis_kelamin"
-          name={'jenis_kelamin'}
-          onChange={handleChange}
-        >
-          <option>Pilih</option>
-          <option value={'laki-laki'}>laki-laki</option>
-          <option value={'perempuan'}>perempuan</option>
-        </Select>
         <Input 
-          value={users.password} 
-          label={"password"} 
-          placeholder="password" 
-          name={'password'} 
+          value={books.nama_penerbit_buku} 
+          label={"Nama Penerbit"} 
+          placeholder="Nama Penerbit" 
+          name={"nama_penerbit_buku"} 
+          onChange={handleChange} 
+        />
+        <Input 
+          value={books.ketebalan_buku} 
+          label={"Ketebalan Buku"} 
+          placeholder="Ketebalan Buku" 
+          name={'ketebalan_buku'} 
           onChange={handleChange}
         />
         <Input 
-          value={users.password_confirmation} 
-          label={"confirm password"} 
-          placeholder="confirm password" 
-          name={'password_confirmation'} 
+          value={books.tahun_terbit_buku} 
+          label={"Tahun diterbitkannya Buku"} 
+          placeholder="tahun diterbitkannya Buku" 
+          name={'tahun_terbit_buku'} 
+          onChange={handleChange}
+        />
+        <Input 
+          value={books.sinopsis} 
+          label={"Sinopsis"} 
+          placeholder="Sinopsis" 
+          name={'sinopsis'} 
           onChange={handleChange}
         />
         <Button title={isLoading ? 'Saving Data' : 'Save'} />
-        <Link to={'/user'} className='pl-5'>
+        <Link to={'/admin/buku'} className='pl-5'>
           <Button title={'Back to user'}/>
         </Link>
         
