@@ -25,7 +25,7 @@ function App() {
         <Route path="/admin/dashboard" element={<Dashboard/>}/>
         <Route path="/admin/buku" element={<Buku/>}/>
         <Route path="/admin/about" element={<About/>}/>
-        <Route path="404" element={<Error replace={true}/>}/>
+        <Route path="/404" element={<Error replace={true}/>}/>
       </Routes>
     </React.Fragment>
     

@@ -3,7 +3,6 @@ import Input from "../module/input";
 import Button from "../module/button";
 import axios from "axios";
 import {useNavigate, Link, useParams} from 'react-router-dom'
-import Select from './select'
 
 export default function UpdateUser() {
     let navigate = useNavigate()
