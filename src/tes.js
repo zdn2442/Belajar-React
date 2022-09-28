@@ -1,4 +1,4 @@
-let result = 62;
+let result = 61;
 if (result >= 90) {
         console.log('Selamat anda mendapatkan nilai A');
 }else if (result >= 80 ) {
