@@ -1,50 +1,62 @@
 import React from "react";
 import axios from "axios";
-import {Link, useNavigate} from 'react-router-dom'
-import Button from '../module/button';
-import Swal from 'sweetalert2'
+import { Link, useNavigate } from "react-router-dom";
+import Button from "../module/button";
+import Swal from "sweetalert2";
+import Skeleton from 'react-loading-skeleton'
 
 export default function User() {
-  let navigate = useNavigate()
+  let navigate = useNavigate();
   const [users, setUsers] = React.useState([]);
   //state untuk menyimpan data user dari api
 
-  const [page, setPage] = React.useState(100);
+  const [page, setPage] = React.useState(150);
   // const [perPage, setPerPage] = React.useState(2);
+  const [isFetchUser, setIsFetchUser] = React.useState(false)
 
   const getUserHandle = async () => {
     try {
+      setIsFetchUser(true)
       const response = await axios.get(`https://belajar-react.smkmadinatulquran.sch.id/api/users/${page}`);
       console.log("response => ", response.data);
       setUsers(response.data.data);
       setPage(response.data.page);
-    } catch (err) {}
+    } catch (err) {
+
+    }finally{
+      setIsFetchUser(false)
+    }
   };
 
   const deleteUserHandle = (id) => {
     Swal.fire({
-      title: 'Are you sure?',
+      title: "Are you sure?",
       text: "You won't be able to revert this!",
-      icon: 'warning',
+      icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
-    }).then((result) => {
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
       if (result.isConfirmed) {
-        Swal.fire(
-          'Deleted!',
-          'Your file has been deleted.',
-          'success'
-        )
-        console.log('delete working', id);
+        try {
+          const response = await axios.delete(`https://belajar-react.smkmadinatulquran.sch.id/api/users/hapus/${id}`);
+          Swal.fire("Deleted!", "Your file has been deleted.", "success");
+          console.log("delete working", id);
+        } catch (error) {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Something went wrong!",
+            footer: '<a href="">Why do I have this issue?</a>',
+          });
+        }
       }
-    })
-    
-  }
+    });
+  };
 
-  console.log("user => ", users);
-  console.log("page => ", page);
+  // console.log("user => ", users);
+  // console.log("page => ", page);
 
   React.useEffect(() => {
     getUserHandle();
@@ -53,7 +65,9 @@ export default function User() {
   return (
     <div>
       <h1>User who is accepted</h1>
-      <Link to='/user/create'>Add User</Link>
+      <Link to="/user/create">
+        <Button title={"Add User"} />
+      </Link>
       <table className="table-auto ">
         <thead>
           <tr className="text-left border">
@@ -68,7 +82,10 @@ export default function User() {
           </tr>
         </thead>
         <tbody>
-          {users.map((user, index) => {
+          {!isFetchUser ?
+          <tr>
+            <td colSpan={9}><Skeleton count={10}/></td>
+          </tr> : users.map((user, index) => {
             return (
               <tr key={index} className="border">
                 <td>{index + 1}</td>
@@ -79,12 +96,20 @@ export default function User() {
                 <td>{user.stored_at}</td>
                 <td>{user.update_at}</td>
                 <td>
-                  <Button onClick={() => {
-                    return navigate(`/user/update/${user.id}`)
-                  }} color='blue' title={'Edit'}/>
-                  <Button onClick={() => {
-                    deleteUserHandle(3)
-                  }} color="red" title={'Delete'}/>
+                  <Button
+                    onClick={() => {
+                      return navigate(`/user/update/${user.id}`);
+                    }}
+                    color="blue"
+                    title={"Edit"}
+                  />
+                  <Button
+                    onClick={() => {
+                      deleteUserHandle(user.id);
+                    }}
+                    color="red"
+                    title={"Delete"}
+                  />
                 </td>
               </tr>
             );
@@ -97,7 +122,7 @@ export default function User() {
         <button
           className="mx-10"
           onClick={() => {
-            console.log('running?');
+            console.log("running?");
             setPage(page - 1);
           }}
         >
@@ -106,7 +131,7 @@ export default function User() {
         <button
           className="mx-10"
           onClick={() => {
-            console.log('running?');
+            console.log("running?");
             setPage(page + 1);
           }}
         >
