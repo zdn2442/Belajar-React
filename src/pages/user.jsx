@@ -13,6 +13,7 @@ export default function User() {
   const [page, setPage] = React.useState(150);
   // const [perPage, setPerPage] = React.useState(2);
   const [isFetchUser, setIsFetchUser] = React.useState(false)
+  
 
   const getUserHandle = async () => {
     try {
@@ -20,7 +21,6 @@ export default function User() {
       const response = await axios.get(`https://belajar-react.smkmadinatulquran.sch.id/api/users/${page}`);
       console.log("response => ", response.data);
       setUsers(response.data.data);
-      setPage(response.data.page);
     } catch (err) {
 
     }finally{
@@ -82,7 +82,7 @@ export default function User() {
           </tr>
         </thead>
         <tbody>
-          {!isFetchUser ?
+          {isFetchUser ?
           <tr>
             <td colSpan={9}><Skeleton count={10}/></td>
           </tr> : users.map((user, index) => {
