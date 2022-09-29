@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Button from "../module/button";
 import Swal from "sweetalert2";
 import Skeleton from 'react-loading-skeleton'
+import {getAllUser, deleteUser} from '../api/user';
 
 export default function User() {
   let navigate = useNavigate();
@@ -18,7 +19,7 @@ export default function User() {
   const getUserHandle = async () => {
     try {
       setIsFetchUser(true)
-      const response = await axios.get(`https://belajar-react.smkmadinatulquran.sch.id/api/users/${page}`);
+      const response = await getAllUser(page)
       console.log("response => ", response.data);
       setUsers(response.data.data);
     } catch (err) {
@@ -40,7 +41,7 @@ export default function User() {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const response = await axios.delete(`https://belajar-react.smkmadinatulquran.sch.id/api/users/hapus/${id}`);
+          const response = await deleteUser(id)
           Swal.fire("Deleted!", "Your file has been deleted.", "success");
           console.log("delete working", id);
         } catch (error) {

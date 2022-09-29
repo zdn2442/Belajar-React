@@ -4,6 +4,7 @@ import Button from "../module/button";
 import axios from "axios";
 import {useNavigate, Link, useParams} from 'react-router-dom'
 import Select from './select'
+import {updateUser, detailUser} from '../api/user'
 
 export default function UpdateUser() {
     let navigate = useNavigate()
@@ -13,7 +14,7 @@ export default function UpdateUser() {
     username: "",
     email: "",
     name: "",
-    jenis_kelamin: "laki-laki",
+    jenis_kelamin: "",
   });
   const handleChange = (e) => {
     setUsers((users) => {
@@ -23,11 +24,12 @@ export default function UpdateUser() {
       };
     });
   };
-  const handleSubmit = async() => {
+  const handleSubmit = async(e) => {
+    e.preventDefault()
     console.log(users);
     try {
         setIsLoading(true)
-        const response = await axios.put(`https://belajar-react.smkmadinatulquran.sch.id/api/users/update/${id}`, users)
+        const response = await updateUser(id, users)
         setIsLoading(false)
          return navigate('/user')
     } catch (err) {
@@ -38,7 +40,7 @@ export default function UpdateUser() {
   }
   const getDetailUser = async() => {
     try {
-        const response  = await axios.get(`https://belajar-react.smkmadinatulquran.sch.id/api/users/detail/${id}`)
+        const response  = await detailUser(id)
         console.log( 'response => ',response.data);
         const dataUser = response.data.data
         console.log(dataUser);

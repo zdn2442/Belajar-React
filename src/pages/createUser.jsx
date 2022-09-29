@@ -4,6 +4,7 @@ import Button from "../module/button";
 import axios from "axios";
 import {useNavigate, Link} from 'react-router-dom'
 import Select from './select'
+import {createUser} from '../api/user';
 
 export default function CreateUser() {
     let navigate = useNavigate()
@@ -31,7 +32,7 @@ export default function CreateUser() {
     console.log(users);
     try {
         setIsLoading(true)
-        const response = await axios.post('https://belajar-react.smkmadinatulquran.sch.id/api/users/create', users)
+        const response = await createUser(users)
         setIsLoading(false)
         // return navigate('/user')
     } catch (err) {
@@ -45,10 +46,11 @@ export default function CreateUser() {
   return (
     <div>
       <h1>Tambah User</h1>
-      <p className="text-red-500">
+      {/* <p className="text-red-500">
         {errorMessage}
-      </p>
+      </p> */}
       <form onSubmit={handleSubmit}>
+      <p className="text-red-500">{error?.username?.[0]}</p>
         <Input 
           value={users.username} 
           label={"username"} 
@@ -73,7 +75,7 @@ export default function CreateUser() {
           name={"email"} 
           onChange={handleChange} 
         />
-        <p className="text-red-500">{error?.username?.[0]}</p>
+        <p className="text-red-500">{error?.jenis_kelamin?.[0]}</p>
         <Select
           value={users.jenis_kelamin}
           label={'jenis_kelamin'}
@@ -85,7 +87,7 @@ export default function CreateUser() {
           <option value={'laki-laki'}>laki-laki</option>
           <option value={'perempuan'}>perempuan</option>
         </Select>
-        <p className="text-red-500">{error?.username?.[0]}</p>
+        <p className="text-red-500">{error?.password?.[0]}</p>
         <Input 
           value={users.password} 
           label={"password"} 
@@ -93,7 +95,6 @@ export default function CreateUser() {
           name={'password'} 
           onChange={handleChange}
         />
-        <p className="text-red-500">{error?.username?.[0]}</p>
         <Input 
           value={users.password_confirmation} 
           label={"confirm password"} 
