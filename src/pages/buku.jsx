@@ -35,7 +35,7 @@ export default function Admin() {
   return (
     <React.Fragment>
       <div className="flex flex-row">
-        <div className="basis-1/5 flex flex-col">
+        <div className="basis-1/5 flex flex-col mr-5">
           <Button title={"Dashboard"} onClick={handleDashboard} />
           <Button title={"Buku"} onClick={handleBuku} />
           <Button title={"About"} onClick={handleAbout} />
@@ -54,10 +54,13 @@ export default function Admin() {
                   <p>Penerbit : {book.nama_penerbit_buku}</p>
                   <p>Ketebalan Buku : {book.ketebalan_buku}</p>
                   <p>Diterbitkan pada tahun {book.tahun_terbit_buku}</p>
+                  <p>Sinopsis : {book.sinopsis}</p>
                   <Button onClick={() => {
                     return navigate(`/admin/update/${book.id}`)
                   }} color='blue' title={'Edit'}/>
-                  <Button color="red" title={'Detail'}/>
+                  <Button color="red" title={'Detail'} onClick={() => {
+                    return navigate(`/admin/${book.id}/detail`)
+                  }}/>
                 </div>
               </div>
             );
