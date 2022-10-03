@@ -5,6 +5,7 @@ import Button from "../module/button";
 import Swal from "sweetalert2";
 import Skeleton from 'react-loading-skeleton'
 import {getAllUser, deleteUser} from '../api/user';
+import Cookies from "js-cookie";
 
 export default function User() {
   let navigate = useNavigate();
@@ -66,9 +67,16 @@ export default function User() {
   return (
     <div>
       <h1>User who is accepted</h1>
-      <Link to="/user/create">
+      <Link to="/user/create" className="mr-5">
         <Button title={"Add User"} />
       </Link>
+      <Button 
+        title='Logout'
+        onClick={() => {
+          Cookies.remove("myapps_token")
+          return navigate("/login", {replace:true})
+        }}
+      />
       <table className="table-auto ">
         <thead>
           <tr className="text-left border">
