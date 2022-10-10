@@ -7,6 +7,10 @@ import CreateUser from "./pages/createUser";
 import UpdateUser from "./pages/updateUser";
 import ProtectedRoute from "./routes/protectRoutes";
 import Login from "./pages/auth/login";
+import Artikel from './pages/article/index';
+import CreateArtikel from './pages/article/createArticle';
+import DetailArtikel from './pages/article/detailArticle'
+import UpdateArtikel from './pages/article/updateArticle'
 
 function App() {
   return (
@@ -43,6 +47,38 @@ function App() {
           element={
             <ProtectedRoute>
               <UpdateUser />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/artikel"
+          element={
+            <ProtectedRoute>
+              <Artikel />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/artikel/createArtikel"
+          element={
+            <ProtectedRoute>
+              <CreateArtikel />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/artikel/detailArtikel/:slug"
+          element={
+            <ProtectedRoute>
+              <DetailArtikel />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/artikel/updateArtikel/:id"
+          element={
+            <ProtectedRoute>
+              <UpdateArtikel />
             </ProtectedRoute>
           }
         />

@@ -27,7 +27,7 @@ export default function Login() {
         const response = await loginProses(payload);
         const data = response.data;
         Cookies.set("myapps_token", data?.token);
-        return navigate("/user", { replace: true });
+        return navigate("/artikel", { replace: true });
     } catch (error) {
         console.log(error);
     } finally {
