@@ -65,7 +65,7 @@ export default function CreateArtikel() {
           onChange={(e) => {
             console.log(e.target.files[0]);
             let file = e.target.files[0]
-            if (file.size > 2000000) {
+            if (file.size > 20000000) {
               return Swal.fire(
                 'Your file is to Powerfull!!',
                 'warning'

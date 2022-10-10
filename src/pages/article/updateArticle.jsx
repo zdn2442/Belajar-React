@@ -12,6 +12,7 @@ export default function UpdateArtikel() {
   const [errorMessage, setErrorMessage] = React.useState('')
   const [error, setError] = React.useState({})
   const [Art, setArt] = React.useState({
+    slug:'',
     judul:'',
     thumbnail:'',
     artikel:'',
@@ -77,9 +78,10 @@ export default function UpdateArtikel() {
         console.log(dataArtikel);
         setArt(() => {
             return{
-                judul: dataArtikel.judul,
-                thumbnail: dataArtikel.thumbnail,
-                artikel: dataArtikel.artikel
+                judul: dataArtikel?.judul,
+                thumbnail: dataArtikel?.thumbnail,
+                artikel: dataArtikel?.artikel,
+                
             }
         })
     } catch (error) {
@@ -116,7 +118,7 @@ export default function UpdateArtikel() {
           onChange={(e) => {
             console.log(e.target.files[0]);
             let file = e.target.files[0]
-            if (file.size > 2000000) {
+            if (file.size > 20000000) {
               return Swal.fire(
                 'Your file is to Powerfull!!',
                 'warning'
@@ -153,7 +155,7 @@ export default function UpdateArtikel() {
           name={"artikel"}
           onChange={handleChange} 
         />
-        <img src={Art.imagePreview} alt="gambar" className="w-50 h-50"/>
+        <img src={Art.thumbnail} alt="gambar" className="w-50 h-50"/>
         <Button title={isLoading ? 'Saving Data' : 'Save'} />
         <Link to={'/user'} className='ml-5'>
           <Button title={'Back to user'}/>

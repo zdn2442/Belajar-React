@@ -9,7 +9,6 @@ export default function Artikel() {
   let navigate = useNavigate();
   const [listArticle, setListArticle] = React.useState([]);
   const [isFetchArticle, setIsFetchArticle] = React.useState(false);
-  // const [isDelete, setIsDelete] = useState(false)
   const getListArticleHandle = async () => {
     try {
       setIsFetchArticle(true);
@@ -27,64 +26,7 @@ export default function Artikel() {
   React.useEffect(() => {
     getListArticleHandle();
   }, []);
-  // const handleDelete = async () => {
-  //   const response = await deleteArtikel(item.id);
-  //   console.log("response", response);
-  //   try {
-  //     setIsDelete(true);
-  //     if (response.data.status === "Fail") {
-  //       const Toast = Swal.mixin({
-  //         toast: true,
-  //         position: "top-start",
-  //         showConfirmButton: false,
-  //         timer: 3000,
-  //         timerProgressBar: true,
-  //         didOpen: (toast) => {
-  //           toast.addEventListener(
-  //             "mouseenter",
-  //             Swal.stopTimer
-  //           );
-  //           toast.addEventListener(
-  //             "mouseleave",
-  //             Swal.resumeTimer
-  //           );
-  //         },
-  //       });
-
-  //       Toast.fire({
-  //         icon: "error",
-  //         title: response.data.message,
-  //       });
-  //     } else {
-  //       const Toast = Swal.mixin({
-  //         toast: true,
-  //         position: "top-start",
-  //         showConfirmButton: false,
-  //         timer: 3000,
-  //         timerProgressBar: true,
-  //         didOpen: (toast) => {
-  //           toast.addEventListener(
-  //             "mouseenter",
-  //             Swal.stopTimer
-  //           );
-  //           toast.addEventListener(
-  //             "mouseleave",
-  //             Swal.resumeTimer
-  //           );
-  //         },
-  //       });
-
-  //       Toast.fire({
-  //         icon: "success",
-  //         title: "Success Deleting Article",
-  //       });
-  //       getUserHandle();
-  //     }
-  //   } catch (error) {
-  //   } finally {
-  //     setIsDelete(false);
-  //   }
-  // }
+  
   return (
     <div>
       <Link to="/artikel/createArtikel" className="mr-5">
@@ -133,10 +75,55 @@ export default function Artikel() {
                       title={"Edit"}
                     />
                     <Button
-                      onClick={() => {
-                        console.log("deleted");
-                       
-                      }}
+                      onClick={
+                        async() => {
+                          console.log("delete jalan");
+                          const response = await deleteArtikel(article.id)
+                          console.log(response.data)
+                          try {
+                            if (response.data.status === "Fail") {
+                              const Toast = Swal.mixin({
+                                toast: true,
+                                position: 'top-end',
+                                showConfirmButton: false,
+                                timer: 3000,
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                  toast.addEventListener('mouseenter', Swal.stopTimer)
+                                  toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                }
+                              })
+                              
+                              Toast.fire({
+                                icon: 'error',
+                                title: 'Failed to Delete Article'
+                              })
+                            }
+                            else {
+                              const Toast = Swal.mixin({
+                                toast: true,
+                                position: 'top-end',
+                                showConfirmButton: false,
+                                timer: 3000,
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                  toast.addEventListener('mouseenter', Swal.stopTimer)
+                                  toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                }
+                              })
+                              
+                              Toast.fire({
+                                icon: 'success',
+                                title: 'Deleted'
+                              })
+                            }
+                            getListArticleHandle()
+                          }
+                          catch (err){
+                            console.log(err);
+                          }
+                        }
+                      }
                       color="red"
                       title={"Delete"}
                     />
