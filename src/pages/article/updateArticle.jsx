@@ -35,10 +35,21 @@ export default function UpdateArtikel() {
         // return navigate('/user')
          console.log("response", response.data);
          if (response.data.status === "Fail" ) {
-          Swal.fire({
-            icon: "error",
-            title: "Failed",
-            text: response.data.message
+          const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer)
+              toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+          })
+          
+          Toast.fire({
+            icon: 'error',
+            title: "You can't update this article"
           })
          } else {
           const Toast = Swal.mixin({
@@ -55,7 +66,7 @@ export default function UpdateArtikel() {
           
           Toast.fire({
             icon: 'success',
-            title: 'Updated'
+            title: 'Article Updated'
           })
          }
          return navigate('/artikel', {replace:true})
@@ -65,7 +76,8 @@ export default function UpdateArtikel() {
         Swal.fire({
           icon: "error",
           title: "Error!",
-          titleText: "Can't Update Article"
+          titleText: "Can't Update Article",
+          footer: error?.judul?.[0] || error?.thumbnail?.[0] || error?.artikel?.[0]
         })
     } finally {
       setIsLoading(false)
@@ -76,12 +88,14 @@ export default function UpdateArtikel() {
         const response = await detailArtikel(slug, Art)
         const dataArtikel = response.data.data
         console.log(dataArtikel);
-        setArt(() => {
+        setArt((Art) => {
             return{
+                ...Art,
+                id:dataArtikel?.id,
                 judul: dataArtikel?.judul,
                 thumbnail: dataArtikel?.thumbnail,
                 artikel: dataArtikel?.artikel,
-                
+                imagePreview: dataArtikel?.thumbnail
             }
         })
     } catch (error) {
@@ -123,8 +137,7 @@ export default function UpdateArtikel() {
                 'Your file is to Powerfull!!',
                 'warning'
               )
-            } if (file.type === 'image/png' || 
-                  file.type === 'image/jpg' ||
+            } if (file.type === 'image/png' ||
                   file.type === 'image/jpeg' ||
                   file.type === 'application/pdf'
                 ) {

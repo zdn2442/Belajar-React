@@ -75,7 +75,7 @@ function App() {
           }
         />
         <Route
-          path="/artikel/updateArtikel/:id"
+          path="/artikel/updateArtikel/:slug"
           element={
             <ProtectedRoute>
               <UpdateArtikel />

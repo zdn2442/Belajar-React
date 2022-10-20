@@ -15,9 +15,9 @@ export async function updateArtikel(id, value) {
     console.log("jalan");
     const formData = new FormData();
     formData.append("judul", value.judul);
-    formData.append("artikel", value.artikel);
     formData.append("thumbnail", value.thumbnail);
-    return axios.post(`artikel/update/${id}`, formData);
+    formData.append("artikel", value.artikel);
+    return axios.post(`/artikel/update/${value?.id}`, formData);
   }
 export async function detailArtikel(slug) {
     return axios.get(`/artikel/${slug}`)
