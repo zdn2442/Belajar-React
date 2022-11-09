@@ -9,15 +9,20 @@ import ProtectedRoute from "./routes/protectRoutes";
 import Login from "./pages/auth/login";
 import Artikel from './pages/article/index';
 import CreateArtikel from './pages/article/createArticle';
-import DetailArtikel from './pages/article/detailArticle'
-import UpdateArtikel from './pages/article/updateArticle'
+import DetailArtikel from './pages/article/detailArticle';
+import UpdateArtikel from './pages/article/updateArticle';
+import {useSelector} from 'react-redux';
+import Register from './pages/auth/register';
 
 function App() {
+  const color = useSelector((state) => state.color)
+  console.log('color',color);
   return (
     <React.Fragment>
-      <h1 className="bg-red-500">API Training</h1>
+      <h1 className={`text-center text-white`} style={{backgroundColor:color.color}}>API Training</h1>
       <Routes>
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route
           path="/user"
           element={
