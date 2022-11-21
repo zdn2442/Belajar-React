@@ -1,6 +1,8 @@
 import React  from "react";
 import RefTutor from './module/useRef'
 import ReducerTutor from './module/useReducer'
+import LayoutEff from './module/useLayoutEffect';
+import Optimize from './optimize';
 
 
 function App() {
@@ -9,7 +11,7 @@ function App() {
     <React.Fragment>
       <h1></h1>
       {/* <RefTutor/> */}
-      <ReducerTutor/>
+      <Optimize/>
     </React.Fragment>
     
       
