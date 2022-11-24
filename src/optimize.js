@@ -1,9 +1,20 @@
-import React, { memo, useCallback } from "react";
+import React, { memo, useCallback, useMemo } from "react";
 
 export default function Parent() {
   const [count, setCount] = React.useState(0);
-  const [user, setUser] = React.useState("ihsan");
+  const [user, setUser] = React.useState("red");
   console.log("parent render");
+
+  const heavyProccess = (count) => {
+    if (count < 2000000000) {
+    }
+    console.log("running");
+    return count + 1;
+  };
+
+  const memoHeavyProccess = useMemo(() => {
+    return heavyProccess(count);
+  }, [count]);
 
   //   const handleCount = () => {
   //     setCount((c) => c + 1);
@@ -19,6 +30,7 @@ export default function Parent() {
     <div>
       <h1>Parent</h1>
       <p>count : {count}</p>
+      <p>count 2 : {memoHeavyProccess}</p>
       <button onClick={handleCount} className="bg-slate-900 rounded text-white w-12 h-7">
         Klik
       </button>
@@ -30,6 +42,31 @@ export default function Parent() {
       >
         Klik
       </button>
+      <button
+        onClick={() => {
+          setUser("red");
+        }}
+        className="bg-red-500 ml-10 mr-5 w-9 h-7 text-white rounded"
+      >
+        Red
+      </button>
+      <button
+        onClick={() => {
+          setUser("green");
+        }}
+        className="bg-green-500 m-5 w-12 h-7 text-white rounded"
+      >
+        Green
+      </button>
+      <button
+        onClick={() => {
+          setUser("blue");
+        }}
+        className="bg-blue-500 m-5 w-10 h-7 text-white rounded"
+      >
+        Blue
+      </button>
+      <div className="w-12 h-12" style={{ backgroundColor: user }}></div>
 
       <MemorizedChild user={user} handleCount={handleCount} />
     </div>
@@ -42,7 +79,7 @@ function Child({ user, handleCount }) {
   return (
     <div>
       <h2>Child</h2>
-      <p>User : {user}</p>
+      <p>Color : {user}</p>
       <button onClick={handleCount} className="bg-emerald-500 text-white w-52 h-12 rounded">
         Tambah count dari component child
       </button>
