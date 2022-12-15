@@ -9,6 +9,7 @@ import Button from "../../module/button";
 import { useDispatch } from "react-redux";
 // import useLogin from "../../hook/useLogin";
 import { authLogin } from "../../reducer/action/authAction";
+import Swal from 'sweetalert2'
 
 const Login = () => {
   let navigate = useNavigate();
@@ -49,9 +50,30 @@ const Login = () => {
       const response = await dispatch(authLogin(payload));
       console.log("response", response);
       if (response?.status === "Success") {
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+          }
+        })
+        
+        Toast.fire({
+          icon: 'success',
+          title: 'Berhasil Login'
+        })
         return navigate("/dashboard", { replace: true });
       } else {
         setErrorMessage(response?.response?.data?.msg);
+        Swal.fire(
+          'Error!',
+          errorMessage,
+          'error'
+        )
       }
       if (payload.password === "") {
         setErrorPassword("Password wajib diisi")
@@ -105,7 +127,7 @@ const Login = () => {
             <form onSubmit={handleSubmit}>
               <p className="text-red-500 mb-5 ml-16">{errorMessage}</p>
               <Input 
-                className="w-96 h-14 border-2 focus:border-2 border-[#9AB2DD] focus:border-[#9AB2DD] rounded-md ml-16 outline-none" 
+                className="w-96 h-14 border-2 focus:border-2 border-[#9AB2DD] focus:border-[#9AB2DD] rounded-md ml-16 outline-none p-5" 
                 placeholder="Email Address" 
                 type="email" 
                 name="email" 
@@ -114,7 +136,7 @@ const Login = () => {
               />
               <p className="text-red-500 ml-16">{errorEmail}</p>
               <Input 
-                className="w-96 h-14 border-2 focus:border-2 border-[#9AB2DD] focus:border-[#9AB2DD] rounded-md ml-16 mt-5 outline-none" 
+                className="w-96 h-14 border-2 focus:border-2 border-[#9AB2DD] focus:border-[#9AB2DD] rounded-md ml-16 mt-5 outline-none p-5" 
                 placeholder="Password" 
                 type="password" 
                 name="password" 

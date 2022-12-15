@@ -5,6 +5,7 @@ import Input from "../../module/input";
 import Button from "../../module/button";
 import { useDispatch } from "react-redux";
 import { authForgotPass } from "../../reducer/action/authAction";
+import Swal from "sweetalert2";
 
 const ForPass = () => {
   let dispatch = useDispatch();
@@ -37,9 +38,19 @@ const ForPass = () => {
       const response = await dispatch(authForgotPass(payload));
       console.log("response", response);
       if (response?.status === "Success") {
-        return navigate("/reset-password", { replace: true });
+        Swal.fire(
+          'Berhasil mengirim email',
+          'Silahkan cek email anda',
+          'success'
+        )
+        // return navigate("/reset-password", { replace: true });
       } else {
         setErrorMessage(response?.response?.data?.msg);
+        Swal.fire(
+          'Error!',
+          errorMessage,
+          'error'
+        )
       }
     } catch (error) {
       console.log(error);

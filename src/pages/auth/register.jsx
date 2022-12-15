@@ -11,12 +11,11 @@ import Button from "../../module/button";
 import { useDispatch } from "react-redux";
 import { authRegister } from "../../reducer/action/authAction";
 import { useState } from "react";
-
+import Swal from "sweetalert2";
 
 const Register = () => {
   let navigate = useNavigate();
   let dispatch = useDispatch();
-
 
   // const { isLoading, setIsLoading, errorEmail, setErrorEmail, errorName, setErrorName, errorPassword, setErrorPassword, errorConfirmPass, setErrorConfirmPass, payload, setPayload, errorStatus, setErrorStatus, errorJenisKelamin, setErrorJenisKelamin } = useRegister();
   const [isLoading, setIsLoading] = useState(false);
@@ -34,7 +33,6 @@ const Register = () => {
     jenisKelamin: "",
   });
 
-  
   const handleClick = () => {
     return navigate("/login", { replace: true });
   };
@@ -55,14 +53,32 @@ const Register = () => {
       const response = await dispatch(authRegister(payload));
       console.log("response", response);
       if (response?.status === "Success") {
+        const Toast = Swal.mixin({
+          toast: true,
+          position: "top-end",
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener("mouseenter", Swal.stopTimer);
+            toast.addEventListener("mouseleave", Swal.resumeTimer);
+          },
+        });
+
+        Toast.fire({
+          icon: "success",
+          title: "Berhasil Register",
+        });
         return navigate("/login", { replace: true });
       } else {
+        setErrorConfirmPass("Password tidak sama")
         setErrorMessage(response?.response?.data?.msg);
         setErrorEmail(response?.response?.data?.errors?.email?.msg);
         setErrorName(response?.response?.data?.errors?.name?.msg);
         setErrorPassword(response?.response?.data?.errors?.password?.msg);
         setErrorStatus(response?.response?.data?.errors?.status?.msg);
         setErrorJenisKelamin(response?.response?.data?.errors?.jenisKelamin?.msg);
+        Swal.fire("Error!", "Gagal Register", "error");
       }
     } catch (error) {
       console.log(error);
@@ -98,23 +114,22 @@ const Register = () => {
           <div className="shadow-xl rounded-md h-3/4 w-2/4 mt-20 ml-[20%] bg-white">
             <h1 className="text-[#9AB2DD] font-semibold text-4xl mt-20 ml-16">Register</h1>
             <form onSubmit={handleSubmit}>
-              <p className="text-red-500">{errorMessage}</p>
-              <Input className="w-3/4 h-14 border-2 border-[#9AB2DD] rounded-md ml-16 mt-20" placeholder="Username" type="name" onChange={handleChange} name="name" />
-              <p className="text-red-500">{errorName}</p>
+              {" "}
+              <div className="">
+                <Input className="w-48 h-14 border-2 border-[#9AB2DD] rounded-md ml-16 mt-20 p-5" placeholder="Username" type="name" onChange={handleChange} name="name" />
+                <Input className="w-48 h-14 border-2 border-[#9AB2DD] rounded-md ml-5 mt-20 p-5" placeholder="Email Address" type="email" onChange={handleChange} name="email" />
+              </div>{" "}
               <div className="flex">
-                <Input className="w-48 h-14 border-2 border-[#9AB2DD] rounded-md ml-16 mt-5" placeholder="Email Address" type="email" onChange={handleChange} name="email" />
-                <p className="text-red-500">{errorEmail}</p>
-                <Input className="w-48 h-14 border-2 border-[#9AB2DD] rounded-md ml-5 mt-5" placeholder="Password" type="password" onChange={handleChange} name="password" />
-                <p className="text-red-500">{errorPassword}</p>
+                <Input className="w-48 h-14 border-2 border-[#9AB2DD] rounded-md ml-16 mt-5 p-5" placeholder="Confirm Password" type="password" onChange={handleChange} name="password" />
+                <Input className="w-48 h-14 border-2 border-[#9AB2DD] rounded-md ml-5 mt-5 p-5" placeholder="Password" type="password" onChange={handleChange} name="password" />
               </div>
               <div className="flex">
-                <Select className="w-48 h-14 border-2 border-[#9AB2DD] rounded-md ml-16 mt-5" placeholder="Status" onChange={handleChange} name="status">
+                <Select className="w-48 h-14 border-2 border-[#9AB2DD] rounded-md ml-16 mt-5 p-5" placeholder="Status" onChange={handleChange} name="status">
                   <option>Status</option>
                   <option value="active">Active</option>
                   <option value="nonactive">NonActive</option>
                 </Select>
-                <p className="text-red-500">{errorStatus}</p>
-                <Select className="w-48 h-14 border-2 border-[#9AB2DD] rounded-md ml-5 mt-5" placeholder="Gender" onChange={handleChange} name="jenisKelamin">
+                <Select className="w-48 h-14 border-2 border-[#9AB2DD] rounded-md ml-5 mt-5 p-5" placeholder="Gender" onChange={handleChange} name="jenisKelamin">
                   <option>Gender</option>
                   <option typeof="enum" value="laki-laki">
                     laki-laki
@@ -123,10 +138,18 @@ const Register = () => {
                     perempuan
                   </option>
                 </Select>
-                <p className="text-red-500">{errorJenisKelamin}</p>
               </div>
               <Button className="w-3/4 h-14 bg-gradient-to-r from-[#2C5DD4] via-[#7DB4DD] to-[#D6ADDC] rounded-md ml-16 mt-10 text-white font-bold" title={isLoading ? "Signed Up" : "Register"} />
             </form>
+          </div>
+          <div className="fixed ml-[39%] mt-28 bg-red-50 rounded-md">
+            <p className="text-red-500">{errorMessage}</p>
+            <p className="text-red-500">{errorName}</p>
+            <p className="text-red-500">{errorEmail}</p>
+            <p className="text-red-500">{errorPassword}</p>
+            <p className="text-red-500">{errorStatus}</p>
+            <p className="text-red-500">{errorJenisKelamin}</p>
+            <p className="text-red-500">{errorConfirmPass}</p>
           </div>
         </div>
         <div className="h-screen  w-1/3 d">

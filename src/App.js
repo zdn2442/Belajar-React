@@ -5,7 +5,9 @@ import CreateNewPass from "./pages/auth/create_new_pass";
 import ForPass from "./pages/auth/for_pass";
 import Login from "./pages/auth/login";
 import Register from "./pages/auth/register";
+import Cart from "./pages/cart";
 import Dashboard from "./pages/dashboard";
+import Detail from "./pages/detail";
 import ProtectRoutes from "./routes/protectRoutes";
 
 function App() {
@@ -19,9 +21,25 @@ function App() {
         <Route
           path="/dashboard"
           element={
-           <ProtectRoutes>
+            <ProtectRoutes>
               <Dashboard />
-           </ProtectRoutes>
+            </ProtectRoutes>
+          }
+        />
+        <Route
+          path="/dashboard/detail/:uuid"
+          element={
+            <ProtectRoutes>
+              <Detail />
+            </ProtectRoutes>
+          }
+        />
+        <Route
+          path="/keranjang"
+          element={
+            <ProtectRoutes>
+              <Cart />
+            </ProtectRoutes>
           }
         />
         <Route path="*" element={<Login />} />

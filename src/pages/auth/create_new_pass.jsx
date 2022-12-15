@@ -75,7 +75,7 @@ const CreateNewPass = () => {
               >
                 password must have numbers and sign
               </p>
-              <Input className="w-96 h-14 border-2 focus:border-2 border-[#9AB2DD] focus:border-[#9AB2DD] rounded-md ml-16 mt-5 outline-none" placeholder="Confirm password" type="password" name="confirmPassword" value={payload.confirmPassword}/>
+              <Input className="w-96 h-14 border-2 focus:border-2 border-[#9AB2DD] focus:border-[#9AB2DD] rounded-md ml-16 mt-5 outline-none" placeholder="Confirm password" type="password" name="confirmPassword" onChange={handleChange} value={payload.confirmPassword}/>
               <p
                 className="text-[#9AB2DD] ml-16 w-[19rem] text-xs
             "

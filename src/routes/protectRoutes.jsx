@@ -6,24 +6,18 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { syncToken } from "../api/base_url";
 import { authMe } from "../reducer/action/authAction";
-const ProtectRoutes = ({ children }) => {
+const ProtectedRoute = ({ children }) => {
   const auth = Cookies.get("myapps_token");
   const isAuth = useSelector((state) => state?.authProcess?.isAuth);
-
-  console.log("auth => ", isAuth);
+  console.log("isAuth", isAuth);
   let [process, setProcess] = React.useState(true);
   let dispatch = useDispatch();
-
   const onLoaded = async (values) => {
-    let result = await dispatch(authMe(values));
     syncToken();
     setProcess(false);
-
-    console.log("res", result);
+    let result = await dispatch(authMe(values));
   };
-  
   React.useEffect(() => {
-
     if (!isAuth) {
       if (auth !== undefined) {
         onLoaded();
@@ -34,21 +28,18 @@ const ProtectRoutes = ({ children }) => {
       syncToken();
       setProcess(false);
     }
+    console.log(isAuth);
   }, []);
-
   if (process) {
     return (
-      <div className="flex justify-center items-center w-full h-screen  ">
-        <div class="loading">
-          <div class="d1"></div>
-          <div class="d2"></div>
-        </div>
+      <div className="flex fixed w-screen h-screen justify-center items-center">
+        <p className="animate-pulse">Loading</p>
       </div>
     );
   } else {
-    console.log("auth", auth);
-    return auth !== undefined ? children : <Navigate to={"/login"} />;
+    console.log(auth);
+    return auth !== undefined ? children : <Navigate to="/login" />;
   }
 };
 
-export default ProtectRoutes;
+export default ProtectedRoute;
