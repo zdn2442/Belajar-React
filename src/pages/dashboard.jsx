@@ -95,7 +95,7 @@ export default function Dashboard() {
           <div className="m-10 grid grid-cols-4 space-y-3 space-x-5 ">
             {fetchProduct ? (
               <div className="flex justify-center items-center w-screen">
-                <ReactLoading type={"spin"} color={"skyblue"} height={100} width={100} className="" />
+                {fetchProduct ? <ReactLoading type={"spin"} color={"skyblue"} height={100} width={100} className="" /> : ( <p>Tidak ada item</p>)}
               </div>
             ) : (
               listProduct.map((item, index) => {
@@ -147,6 +147,20 @@ export default function Dashboard() {
                 onChange={handleChange}
                 name="hargaTerendah"
                 placeholder="Harga Terendah"
+              />
+              <Button
+                 onClick={() => {
+                  setPayload(() => {
+                    return {
+                      kategori: "",
+                      keyword: "",
+                      hargaTerendah: "",
+                      hargaTertinggi: "",
+                    };
+                  });
+                }}
+                title='Reset Filter'
+                className='w-36 h-10 bg-gradient-to-l from-[#D6ADDC] via-[#7DB4DD] to-[#2C5DD4] text-white rounded-md mt-5'
               />
             </div>
           </div>

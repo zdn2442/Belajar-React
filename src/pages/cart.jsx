@@ -9,13 +9,14 @@ import ReactLoading from "react-loading";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import Button from "../module/button";
+import { MdDeleteForever } from "react-icons/md";
 
 export default function Cart() {
   const author = useSelector((state) => state.auth);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const convertRupiah = require("rupiah-format");
   const navigate = useNavigate();
-  const [total, setTotal] = useState()
+  const [total, setTotal] = useState();
   const [payload, setPayload] = useState({
     id: "",
     jumlah: "",
@@ -29,8 +30,9 @@ export default function Cart() {
 
   const tambahItem = async (id, jumlah) => {
     try {
-      getListKeranjang()
+      // getListKeranjang();
       const response = await dispatch(ubahItem(total));
+      console.log('response => ', response)
       setTotal({
         id: id,
         jumlah: jumlah,
@@ -83,7 +85,9 @@ export default function Cart() {
       console.log("RES", response);
       getListKeranjang();
       return;
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
     getListKeranjang();
   };
 
@@ -111,8 +115,8 @@ export default function Cart() {
   };
 
   const handleClick = () => {
-    return navigate("/dashoard")
-  }
+    return navigate("/dashoard");
+  };
 
   let array = listKeranjang.map((value) => value?.produk?.harga);
   const hasil = array.reduce((total, currentValue) => total + currentValue, 0);
@@ -143,12 +147,12 @@ export default function Cart() {
         <div className="h-20"></div>
         <div className="mx-36 px-[43px] mt-10">
           <div className="rounded-full w-8 h-8 shadow-lg bg-slate-200 text-sm text-center p-[9px] cursor-pointer" onClick={handleClick}>
-            <BiArrowBack/>
+            <BiArrowBack />
           </div>
           {/* <CardCart/> */}
-          {listKeranjang.length == 0 ? (
+          {listKeranjang.length === 0 ? (
             <div className="w-full text-center mt-24">
-              <h1 className="font-bold text-3xl">Tidak Ada Barang di keranjang</h1>
+              <h1 className="font-bold text-3xl my-7">Tidak Ada Barang di keranjang</h1>
             </div>
           ) : (
             // {fetchProduct  (
@@ -156,40 +160,65 @@ export default function Cart() {
             //   //   <ReactLoading type={"spin"} color={"skyblue"} height={100} width={100} className="" />
             //   // </div>
             // ) : (
-              listKeranjang.map((item, index) => {
-                let converter = require("rupiah-format");
-                let harga = item?.produk?.harga;
-                let hargaConvert = converter.convert(harga);
-                let gambar = item?.produk?.gambarProduk;
-                const gambarConvert = JSON.parse(gambar);
-                return (
-                  <CardCart
-                    key={index}
-                    namaProduk={item.namaProduk}
-                    gambar={gambarConvert[0].gambar1}
-                    hargaSatuan={hargaConvert}
-                    // onClickHapus={deleteProduct(item.id)}
-                    hargaTotal={convertRupiah.convert(total)}
-                    onClickTambah={() => {
-                      console.log("tambah");
-                      tambahItem(item.id, item.jumlah + 1);
-                    }}
-                    onClickKurang={() => {
-                      console.log("tambah");
-                      tambahItem(item.id, item.jumlah - 1);
-                    }}
-                    jumlah={item.jumlah}
-                  />
-                );
-              })
-            )}
-            <div>
-              <div className="w-[100%] h-px bg-slate-400 mt-5"></div>
-              <div className="w-[100%] h-20 flex justify-between">
-                <p>{hasil}</p>
-                <Button title={"Beli"} className="w-36 h-8 bg-[#7DB4DD] rounded-md text-white" onClick={buyNow}/>
-              </div>
+            listKeranjang.map((item, index) => {
+              let converter = require("rupiah-format");
+              let harga = item?.produk?.harga;
+              let hargaConvert = converter.convert(harga);
+              let gambar = item?.produk?.gambarProduk;
+              const gambarConvert = JSON.parse(gambar);
+              // const handleKurang = () => {
+              //   if (item.jumlah <= 1) {
+              //     return deleteProduct(item.id);
+              //   } else {
+              //     tambahItem(item.id, item.jumlah--);
+              //   }
+              //   // getProduct();
+              // };
+              // const handleTambah = () => {
+              //   if (item.jumlah === -1) {
+              //     return;
+              //   } else {
+              //     tambahItem(item.id, item.jumlah++);
+              //   } // getProduct();
+              // };
+              return (
+                <div className="h-36 w-[100%] border-4 border-[#7DB4DD] rounded-xl flex items-center space-x-16 mt-5">
+                  <img src={gambarConvert[0].gambar1} alt="gambar produk" className="bg-slate-200 w-48 h-[136px] rounded-lg" />
+                  <h1 className="w-24">{item.produk.namaProduk}</h1>
+                  <p>{hargaConvert}</p>
+                  <div className="w-10 h-10 bg-gradient-to-l from-[#D6ADDC] via-[#7DB4DD] to-[#2C5DD4] text-white text-center py-[6px] rounded-md cursor-pointer" onClick={() => {
+                    console.log("tambah")
+                    tambahItem(item.id, item.jumlah + 1)
+                  }}>
+                    +
+                  </div>
+                  <p>{item.jumlah}</p>
+                  <div className="w-10 h-10 bg-gradient-to-l from-[#D6ADDC] via-[#7DB4DD] to-[#2C5DD4] text-white text-center py-[6px] rounded-md cursor-pointer" onClick={() => {
+                    console.log("kurang")
+                    tambahItem(item.id, item.jumlah - 1)
+                  }}>
+                    -
+                  </div>  
+                  <p>
+                  {convertRupiah.convert(
+                          item.produk.harga * item.jumlah
+                        )}
+                  </p>  
+                  <div className="border-2 border-red-500 text-red-500 w-10 h-10 text-center px-[10px] py-2 rounded-md cursor-pointer hover:bg-red-500 hover:text-white">
+                    <MdDeleteForever />
+                  </div>
+                </div>
+              );
+            })
+          )}
+          <div>
+            <div className="w-[100%] h-px bg-slate-400 mt-5"></div>
+            <div className="w-[100%] h-20 flex justify-between">
+              <p>Total barang : {listKeranjang.length}</p>
+              <p>Total harga : {convertRupiah.convert(hasil)}</p>
+              <Button title={"Beli"} className="w-36 h-8 bg-[#7DB4DD] rounded-md text-white" onClick={buyNow} />
             </div>
+          </div>
         </div>
       </div>
     </React.Fragment>

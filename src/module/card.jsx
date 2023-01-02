@@ -44,17 +44,17 @@ export function Card({ gambar, namaProduk, harga, deskripsi, rating, stok }) {
   );
 }
 
-export function CardCart({gambar, namaProduk, hargaSatuan, hargaTotal, jumlah, onClickTambah, onClickHapus, onClickKurang}) {
-  return (
-    <div className="h-36 w-[100%] border-4 border-[#7DB4DD] rounded-xl flex items-center space-x-16 mt-5">
-      <img src={gambar} alt="gambar produk" className="bg-slate-200 w-48 h-[136px] rounded-lg"/>
-      <h1>{namaProduk}</h1>
-      <p>{hargaSatuan}</p>
-      <div className="w-10 h-10 bg-gradient-to-l from-[#D6ADDC] via-[#7DB4DD] to-[#2C5DD4] text-white text-center py-[6px] rounded-md cursor-pointer" onClick={onClickTambah}>+</div>
-      <p>{jumlah}</p>
-      <div className="w-10 h-10 bg-gradient-to-l from-[#D6ADDC] via-[#7DB4DD] to-[#2C5DD4] text-white text-center py-[6px] rounded-md cursor-pointer" onClick={onClickKurang}>-</div>
-      <p>{hargaTotal}</p>
-      <div className="border-2 border-red-500 text-red-500 w-10 h-10 text-center px-[10px] py-2 rounded-md cursor-pointer hover:bg-red-500 hover:text-white" onClick={onClickHapus}><MdDeleteForever/></div>
-    </div>
-  )
-}
+// export function CardCart({gambar, namaProduk, hargaSatuan, hargaTotal, jumlah, onClickTambah, onClickHapus, onClickKurang}) {
+//   return (
+//     <div className="h-36 w-[100%] border-4 border-[#7DB4DD] rounded-xl flex items-center space-x-16 mt-5">
+//       <img src={gambar} alt="gambar produk" className="bg-slate-200 w-48 h-[136px] rounded-lg"/>
+//       <h1>{namaProduk}</h1>
+//       <p>{hargaSatuan}</p>
+//       <div className="w-10 h-10 bg-gradient-to-l from-[#D6ADDC] via-[#7DB4DD] to-[#2C5DD4] text-white text-center py-[6px] rounded-md cursor-pointer" onClick={onClickTambah}>+</div>
+//       <p>{jumlah}</p>
+//       <div className="w-10 h-10 bg-gradient-to-l from-[#D6ADDC] via-[#7DB4DD] to-[#2C5DD4] text-white text-center py-[6px] rounded-md cursor-pointer" onClick={onClickKurang}>-</div>
+//       <p>{hargaTotal}</p>
+//       <div className="border-2 border-red-500 text-red-500 w-10 h-10 text-center px-[10px] py-2 rounded-md cursor-pointer hover:bg-red-500 hover:text-white" onClick={onClickHapus}><MdDeleteForever/></div>
+//     </div>
+//   )
+// }

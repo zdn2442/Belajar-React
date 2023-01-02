@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import gambar from "../../images/gambarSamping.png";
 import { useNavigate } from "react-router-dom";
 import Input from "../../module/input";
@@ -12,7 +12,7 @@ const ForPass = () => {
   let navigate = useNavigate();
 
   const [errorMessage, setErrorMessage] = useState("");
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
   const [payload, setPayload] = useState({
     email: "",
   });
@@ -32,25 +32,17 @@ const ForPass = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('running submit');
+    console.log("running submit");
     try {
       setIsLoading(true);
       const response = await dispatch(authForgotPass(payload));
       console.log("response", response);
       if (response?.status === "Success") {
-        Swal.fire(
-          'Berhasil mengirim email',
-          'Silahkan cek email anda',
-          'success'
-        )
+        Swal.fire("Berhasil mengirim email", "Silahkan cek email anda", "success");
         // return navigate("/reset-password", { replace: true });
       } else {
         setErrorMessage(response?.response?.data?.msg);
-        Swal.fire(
-          'Error!',
-          errorMessage,
-          'error'
-        )
+        Swal.fire("Error!", errorMessage, "error");
       }
     } catch (error) {
       console.log(error);
@@ -72,11 +64,18 @@ const ForPass = () => {
               className="text-[#9AB2DD] ml-16 mt-10 w-[19rem]
             "
             >
-              <p className="text-red-500">{errorMessage}</p>
               Please enter your email, we will send an url to you to reset your password
             </p>
             <form onSubmit={handleSubmit}>
-              <Input className="w-96 h-14 border-2 focus:border-2 border-[#9AB2DD] focus:border-[#9AB2DD] rounded-md ml-16 mt-10 outline-none" placeholder="Email Address" type="email" name="email" onChange={handleChange} value={payload.email}/>
+              <p className="text-red-500">{errorMessage}</p>
+              <Input
+                className="w-96 h-14 border-2 focus:border-2 border-[#9AB2DD] focus:border-[#9AB2DD] rounded-md ml-16 mt-10 outline-none"
+                placeholder="Email Address"
+                type="email"
+                name="email"
+                onChange={handleChange}
+                value={payload.email}
+              />
               <Button className="w-96 h-14 bg-gradient-to-r from-[#2C5DD4] via-[#7DB4DD] to-[#D6ADDC] rounded-md ml-16 mt-[73px] text-white font-bold" title={isLoading ? "Sending" : "Send"} />
             </form>
           </div>
